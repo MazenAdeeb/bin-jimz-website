@@ -1,6 +1,5 @@
 "use client";
 
-import { useTranslations } from "next-intl";
 import dynamic from "next/dynamic";
 import { Section, H2 } from "@/components/ui/section";
 import { Reveal } from "@/components/motion/reveal";
@@ -13,8 +12,14 @@ const CyberGrid = dynamic(
   { ssr: false },
 );
 
-export function Cta() {
-  const t = useTranslations("home");
+type Props = {
+  title: string;
+  copy: string;
+  button: string;
+  secondaryButton: string;
+};
+
+export function Cta({ title, copy, button, secondaryButton }: Props) {
   return (
     <Section className="relative overflow-hidden">
       <div className="pointer-events-none absolute inset-0 -z-10 opacity-60">
@@ -29,22 +34,22 @@ export function Cta() {
       />
       <Reveal>
         <div className="mx-auto max-w-3xl text-center">
-          <H2 className="text-balance">{t("ctaTitle")}</H2>
+          <H2 className="text-balance">{title}</H2>
           <p
             className="mx-auto mt-6 max-w-xl text-base md:text-lg"
             style={{ color: "var(--color-text-dim)" }}
           >
-            {t("ctaCopy")}
+            {copy}
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-3">
             <Link href="/contact">
               <Button variant="gold">
-                {t("ctaButton")}
+                {button}
                 <ArrowUpRight size={14} />
               </Button>
             </Link>
             <Link href="/chat">
-              <Button variant="cyber">{t("heroSecondaryCta")}</Button>
+              <Button variant="cyber">{secondaryButton}</Button>
             </Link>
           </div>
         </div>

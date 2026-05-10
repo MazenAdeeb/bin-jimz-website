@@ -11,11 +11,13 @@ import {
   Image as ImageIcon,
   Settings,
   LogOut,
+  Type,
 } from "lucide-react";
 import { BrandMark } from "@/components/ui/brand-mark";
 
 const navItems = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/admin/site", label: "Site content", icon: Type },
   { href: "/admin/projects", label: "Projects", icon: FolderKanban },
   { href: "/admin/news", label: "News", icon: Newspaper },
   { href: "/admin/team", label: "Team", icon: Users },

@@ -5,6 +5,7 @@ import { Reveal, StaggerChildren, StaggerItem } from "@/components/motion/reveal
 import { Cta } from "@/components/sections/cta";
 import { Building2, Package, HardHat, Shield, Check } from "lucide-react";
 import type { ComponentType } from "react";
+import { getSiteContent } from "@/lib/site-content";
 
 type Pillar = "engineering" | "supplies" | "contracting" | "cybersecurity";
 
@@ -79,6 +80,8 @@ export default async function ServiceDetailPage({
   const key = pillar as Pillar;
   const Icon = meta[key].icon;
   const t = await getTranslations(`services.${key}`);
+  const lang = locale === "ar" ? "ar" : "en";
+  const content = await getSiteContent();
 
   const isCyber = key === "cybersecurity";
 
@@ -161,7 +164,12 @@ export default async function ServiceDetailPage({
         </div>
       </Section>
 
-      <Cta />
+      <Cta
+        title={content.cta.title[lang]}
+        copy={content.cta.copy[lang]}
+        button={content.cta.button[lang]}
+        secondaryButton={content.hero.secondaryCta[lang]}
+      />
     </>
   );
 }

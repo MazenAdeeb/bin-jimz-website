@@ -4,47 +4,32 @@ import { useTranslations } from "next-intl";
 import { Building2, Package, HardHat, Shield, ArrowUpRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Section, Eyebrow, H2, Lead } from "@/components/ui/section";
-import { Reveal, StaggerChildren, StaggerItem } from "@/components/motion/reveal";
+import { StaggerChildren, StaggerItem, Reveal } from "@/components/motion/reveal";
 import { HoverArea } from "@/components/cursor/hover-area";
 
 const pillars = [
-  {
-    href: "/services/engineering",
-    icon: Building2,
-    key: "engineering" as const,
-    accent: "gold",
-  },
-  {
-    href: "/services/supplies",
-    icon: Package,
-    key: "supplies" as const,
-    accent: "gold",
-  },
-  {
-    href: "/services/contracting",
-    icon: HardHat,
-    key: "contracting" as const,
-    accent: "gold",
-  },
-  {
-    href: "/services/cybersecurity",
-    icon: Shield,
-    key: "cybersecurity" as const,
-    accent: "cyber",
-  },
+  { href: "/services/engineering", icon: Building2, key: "engineering" as const, accent: "gold" },
+  { href: "/services/supplies", icon: Package, key: "supplies" as const, accent: "gold" },
+  { href: "/services/contracting", icon: HardHat, key: "contracting" as const, accent: "gold" },
+  { href: "/services/cybersecurity", icon: Shield, key: "cybersecurity" as const, accent: "cyber" },
 ];
 
-export function ServicesGrid() {
-  const t = useTranslations("home");
+type Props = {
+  eyebrow: string;
+  title: string;
+  intro: string;
+  learnMore: string;
+};
+
+export function ServicesGrid({ eyebrow, title, intro, learnMore }: Props) {
   const tServices = useTranslations("services");
-  const tCommon = useTranslations("common");
 
   return (
     <Section>
       <Reveal>
-        <Eyebrow>{t("servicesEyebrow")}</Eyebrow>
-        <H2 className="mt-5 max-w-3xl">{t("servicesTitle")}</H2>
-        <Lead className="mt-5">{t("servicesIntro")}</Lead>
+        <Eyebrow>{eyebrow}</Eyebrow>
+        <H2 className="mt-5 max-w-3xl">{title}</H2>
+        <Lead className="mt-5">{intro}</Lead>
       </Reveal>
 
       <StaggerChildren className="mt-14 grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -89,9 +74,7 @@ export function ServicesGrid() {
                       <ArrowUpRight
                         size={20}
                         className="transition-transform duration-500 group-hover:-translate-y-1 group-hover:translate-x-1"
-                        style={{
-                          color: isCyber ? "var(--color-cyber)" : "var(--color-gold)",
-                        }}
+                        style={{ color: isCyber ? "var(--color-cyber)" : "var(--color-gold)" }}
                       />
                     </div>
 
@@ -112,11 +95,9 @@ export function ServicesGrid() {
                     </p>
                     <p
                       className="font-display mt-6 inline-flex items-center gap-2 text-[11px] tracking-[0.22em] uppercase opacity-70 transition-opacity group-hover:opacity-100"
-                      style={{
-                        color: isCyber ? "var(--color-cyber)" : "var(--color-gold)",
-                      }}
+                      style={{ color: isCyber ? "var(--color-cyber)" : "var(--color-gold)" }}
                     >
-                      {tCommon("learnMore")} →
+                      {learnMore} →
                     </p>
                   </div>
                 </HoverArea>

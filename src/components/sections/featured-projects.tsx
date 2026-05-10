@@ -1,6 +1,5 @@
 "use client";
 
-import { useTranslations } from "next-intl";
 import { Section, Eyebrow, H2 } from "@/components/ui/section";
 import { Reveal } from "@/components/motion/reveal";
 import { Link } from "@/i18n/navigation";
@@ -9,7 +8,7 @@ import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-type Project = {
+export type FeaturedProject = {
   slug: string;
   title: string;
   sector: string;
@@ -18,65 +17,32 @@ type Project = {
   cover: string;
 };
 
-const seedProjects: Project[] = [
-  {
-    slug: "national-pavilion-cairo",
-    title: "National Pavilion · Mega Event",
-    sector: "Government",
-    year: 2025,
-    service: "Contracting",
-    cover:
-      "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?auto=format&fit=crop&w=1600&q=80",
-  },
-  {
-    slug: "secure-banking-network",
-    title: "Secure Banking Network",
-    sector: "Banking & Finance",
-    year: 2025,
-    service: "Cybersecurity",
-    cover:
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80",
-  },
-  {
-    slug: "luxury-retail-fitout",
-    title: "Luxury Retail Fit-Out",
-    sector: "Retail",
-    year: 2024,
-    service: "Engineering",
-    cover:
-      "https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=1600&q=80",
-  },
-  {
-    slug: "smart-headquarters",
-    title: "Smart Corporate Headquarters",
-    sector: "Commercial",
-    year: 2024,
-    service: "Engineering",
-    cover:
-      "https://images.unsplash.com/photo-1545558014-8692077e9b5c?auto=format&fit=crop&w=1600&q=80",
-  },
-];
+type Props = {
+  eyebrow: string;
+  title: string;
+  viewAllLabel: string;
+  projects: FeaturedProject[];
+};
 
-export function FeaturedProjects() {
-  const t = useTranslations("home");
-  const tCommon = useTranslations("common");
+export function FeaturedProjects({ eyebrow, title, viewAllLabel, projects }: Props) {
+  if (projects.length === 0) return null;
 
   return (
     <Section>
       <div className="mb-12 flex items-end justify-between gap-6">
         <Reveal>
-          <Eyebrow>{t("projectsEyebrow")}</Eyebrow>
-          <H2 className="mt-5">{t("projectsTitle")}</H2>
+          <Eyebrow>{eyebrow}</Eyebrow>
+          <H2 className="mt-5">{title}</H2>
         </Reveal>
         <Reveal>
           <Link href="/projects">
-            <Button variant="link">{tCommon("viewAll")}  →</Button>
+            <Button variant="link">{viewAllLabel}  →</Button>
           </Link>
         </Reveal>
       </div>
 
       <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-        {seedProjects.map((p, i) => (
+        {projects.map((p, i) => (
           <Reveal key={p.slug} delay={i * 0.06}>
             <Link href={`/projects/${p.slug}`}>
               <HoverArea variant="view">

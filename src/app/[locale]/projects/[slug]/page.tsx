@@ -5,6 +5,7 @@ import { Section, Eyebrow, H1, H3 } from "@/components/ui/section";
 import { Reveal } from "@/components/motion/reveal";
 import { Cta } from "@/components/sections/cta";
 import { allProjects } from "@/data/projects";
+import { getSiteContent } from "@/lib/site-content";
 
 export function generateStaticParams() {
   return allProjects.flatMap((p) =>
@@ -21,6 +22,9 @@ export default async function ProjectDetailPage({
   setRequestLocale(locale);
   const project = allProjects.find((p) => p.slug === slug);
   if (!project) notFound();
+
+  const lang = locale === "ar" ? "ar" : "en";
+  const content = await getSiteContent();
 
   return (
     <>
@@ -100,7 +104,12 @@ export default async function ProjectDetailPage({
         </Section>
       )}
 
-      <Cta />
+      <Cta
+        title={content.cta.title[lang]}
+        copy={content.cta.copy[lang]}
+        button={content.cta.button[lang]}
+        secondaryButton={content.hero.secondaryCta[lang]}
+      />
     </>
   );
 }

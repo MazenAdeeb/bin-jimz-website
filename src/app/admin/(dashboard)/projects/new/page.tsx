@@ -1,43 +1,60 @@
-import { prisma } from "@/lib/db";
 import { redirect } from "next/navigation";
-import { AdminPageHeader } from "@/components/admin/page-header";
+import { revalidatePath } from "next/cache";
+import { ProjectStatus } from "@prisma/client";
+import { prisma } from "@/lib/db";
 import { slugify } from "@/lib/utils";
-import { ProjectStatus, type ServicePillar } from "@prisma/client";
+import { AdminPageHeader } from "@/components/admin/page-header";
+import { ProjectForm } from "@/components/admin/project-form";
 
 async function createProject(fd: FormData) {
   "use server";
-  const titleEn = String(fd.get("titleEn") ?? "");
-  const titleAr = String(fd.get("titleAr") ?? "");
-  const summaryEn = String(fd.get("summaryEn") ?? "");
-  const summaryAr = String(fd.get("summaryAr") ?? "");
-  const sector = String(fd.get("sector") ?? "");
-  const year = parseInt(String(fd.get("year") ?? "2025"), 10);
-  const slug = slugify(titleEn);
+  const titleEn = String(fd.get("titleEn") ?? "").trim();
+  const titleAr = String(fd.get("titleAr") ?? "").trim();
+  const summaryEn = String(fd.get("summaryEn") ?? "").trim();
+  const summaryAr = String(fd.get("summaryAr") ?? "").trim();
+  const scopeEn = String(fd.get("scopeEn") ?? "").trim();
+  const scopeAr = String(fd.get("scopeAr") ?? "").trim();
+  const outcomesEn = String(fd.get("outcomesEn") ?? "").trim();
+  const outcomesAr = String(fd.get("outcomesAr") ?? "").trim();
+  const sector = String(fd.get("sector") ?? "").trim();
+  const client = String(fd.get("client") ?? "").trim();
+  const location = String(fd.get("location") ?? "").trim();
+  const year = parseInt(String(fd.get("year") ?? new Date().getFullYear()), 10);
   const featured = fd.get("featured") === "on";
+  const status = (String(fd.get("status") ?? "draft") as ProjectStatus) || "draft";
+  const coverImageId = (fd.get("coverImageId") as string) || null;
+  const galleryIds = fd.getAll("galleryIds").map(String).filter(Boolean);
 
-  await prisma.project.create({
+  const baseSlug = slugify(titleEn);
+  const slug = `${baseSlug}-${Math.random().toString(36).slice(2, 6)}`;
+
+  const project = await prisma.project.create({
     data: {
       slug,
       year,
-      sector,
+      sector: sector || null,
+      client: client || null,
+      location: location || null,
       featured,
-      status: ProjectStatus.draft,
+      status,
+      coverImageId,
+      galleryIds,
       translations: {
         create: [
           {
             locale: "en",
             title: titleEn,
             summary: summaryEn,
-            scope: "",
-            outcomes: "",
+            scope: scopeEn,
+            outcomes: outcomesEn,
             tags: [],
           },
           {
             locale: "ar",
             title: titleAr || titleEn,
             summary: summaryAr || summaryEn,
-            scope: "",
-            outcomes: "",
+            scope: scopeAr || scopeEn,
+            outcomes: outcomesAr || outcomesEn,
             tags: [],
           },
         ],
@@ -45,97 +62,17 @@ async function createProject(fd: FormData) {
     },
   });
 
-  redirect("/admin/projects");
+  revalidatePath("/admin/projects");
+  revalidatePath("/en/projects");
+  revalidatePath("/ar/projects");
+  redirect(`/admin/projects/${project.id}`);
 }
 
 export default function NewProjectPage() {
   return (
     <>
       <AdminPageHeader title="New project" subtitle="Add a case study to the portfolio." />
-
-      <form action={createProject} className="mt-8 max-w-3xl space-y-6">
-        <div className="grid gap-5 md:grid-cols-2">
-          <Field name="titleEn" label="Title (EN)" required />
-          <Field name="titleAr" label="Title (AR)" />
-          <Field name="sector" label="Sector" />
-          <Field name="year" label="Year" type="number" defaultValue="2025" />
-        </div>
-        <Textarea name="summaryEn" label="Summary (EN)" rows={4} required />
-        <Textarea name="summaryAr" label="Summary (AR)" rows={4} />
-
-        <label className="inline-flex items-center gap-2 text-sm" style={{ color: "var(--color-text-dim)" }}>
-          <input type="checkbox" name="featured" /> Feature on home page
-        </label>
-
-        <div className="flex justify-end gap-3 pt-4">
-          <button
-            type="submit"
-            className="font-display rounded px-7 py-3 text-[11px] tracking-[0.22em] uppercase text-[var(--color-base)]"
-            style={{ background: "var(--color-gold)" }}
-          >
-            Save draft
-          </button>
-        </div>
-      </form>
+      <ProjectForm action={createProject} />
     </>
-  );
-}
-
-function Field({
-  name,
-  label,
-  type = "text",
-  required,
-  defaultValue,
-}: {
-  name: string;
-  label: string;
-  type?: string;
-  required?: boolean;
-  defaultValue?: string;
-}) {
-  return (
-    <label className="block">
-      <span className="font-display text-[10px] tracking-[0.22em] uppercase"
-            style={{ color: "var(--color-gold)" }}>
-        {label}
-      </span>
-      <input
-        name={name}
-        type={type}
-        required={required}
-        defaultValue={defaultValue}
-        className="mt-2 w-full border-b bg-transparent px-0 py-2 text-sm outline-none transition-colors focus:border-[var(--color-gold)]"
-        style={{ borderColor: "rgba(200,169,106,0.3)" }}
-      />
-    </label>
-  );
-}
-
-function Textarea({
-  name,
-  label,
-  rows = 4,
-  required,
-}: {
-  name: string;
-  label: string;
-  rows?: number;
-  required?: boolean;
-}) {
-  return (
-    <label className="block">
-      <span className="font-display text-[10px] tracking-[0.22em] uppercase"
-            style={{ color: "var(--color-gold)" }}>
-        {label}
-      </span>
-      <textarea
-        name={name}
-        rows={rows}
-        required={required}
-        className="mt-2 w-full resize-y border-b bg-transparent px-0 py-2 text-sm outline-none transition-colors focus:border-[var(--color-gold)]"
-        style={{ borderColor: "rgba(200,169,106,0.3)" }}
-      />
-    </label>
   );
 }

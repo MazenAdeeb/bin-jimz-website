@@ -21,15 +21,14 @@ const items = [
   { key: "innovation" as const, icon: Lightbulb },
 ];
 
-export function Essence() {
-  const t = useTranslations("home");
+export function Essence({ eyebrow, title }: { eyebrow: string; title: string }) {
   const te = useTranslations("essence");
 
   return (
     <Section className="border-y border-white/5">
       <Reveal>
-        <Eyebrow>{t("essenceEyebrow")}</Eyebrow>
-        <H2 className="mt-5">{t("essenceTitle")}</H2>
+        <Eyebrow>{eyebrow}</Eyebrow>
+        <H2 className="mt-5">{title}</H2>
       </Reveal>
 
       <StaggerChildren className="mt-14 grid grid-cols-2 gap-x-8 gap-y-12 md:grid-cols-3 lg:grid-cols-6">

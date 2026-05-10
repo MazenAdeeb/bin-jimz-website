@@ -5,20 +5,16 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { MessageCircle, X } from "lucide-react";
 import { ChatPanel } from "./chat-panel";
-import { useCursor } from "@/components/cursor/cursor-context";
 
 export function ChatDock() {
   const t = useTranslations("chat");
   const [open, setOpen] = useState(false);
-  const { setVariant, reset } = useCursor();
 
   return (
     <>
       <div className="fixed bottom-6 right-6 z-[60] md:bottom-8 md:right-8">
         <button
           onClick={() => setOpen((o) => !o)}
-          onPointerEnter={() => setVariant("talk")}
-          onPointerLeave={reset}
           aria-label={open ? t("close") : t("open")}
           className="group relative flex h-14 w-14 items-center justify-center rounded-full transition-transform duration-300 hover:scale-105"
           style={{

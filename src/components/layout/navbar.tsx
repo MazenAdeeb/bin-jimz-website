@@ -7,7 +7,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Globe } from "lucide-react";
 import { BrandMark } from "@/components/ui/brand-mark";
 import { Button } from "@/components/ui/button";
-import { Magnetic } from "@/components/cursor/magnetic";
 import { cn } from "@/lib/utils";
 
 const links = [
@@ -50,11 +49,9 @@ export function Navbar() {
       )}
     >
       <nav className="mx-auto flex h-20 max-w-[1480px] items-center justify-between px-6 md:px-10">
-        <Magnetic variant="hover">
-          <Link href="/" aria-label="Bin Jimz home">
-            <BrandMark size={36} />
-          </Link>
-        </Magnetic>
+        <Link href="/" aria-label="Bin Jimz home">
+          <BrandMark size={36} />
+        </Link>
 
         <ul className="hidden items-center gap-1 lg:flex">
           {links.map((l) => {
@@ -64,26 +61,24 @@ export function Navbar() {
                 : pathname.startsWith(l.href);
             return (
               <li key={l.href}>
-                <Magnetic variant="hover" strength={0.15}>
-                  <Link
-                    href={l.href}
-                    className={cn(
-                      "font-display relative px-4 py-2 text-[11px] tracking-[0.18em] uppercase transition-colors",
-                      isActive
-                        ? "text-[var(--color-gold)]"
-                        : "text-[var(--color-text-dim)] hover:text-[var(--color-text)]",
-                    )}
-                  >
-                    {t(l.key)}
-                    {isActive && (
-                      <motion.span
-                        layoutId="navline"
-                        className="absolute -bottom-0.5 left-1/2 h-px w-6 -translate-x-1/2"
-                        style={{ background: "var(--color-gold)" }}
-                      />
-                    )}
-                  </Link>
-                </Magnetic>
+                <Link
+                  href={l.href}
+                  className={cn(
+                    "font-display relative px-4 py-2 text-[11px] tracking-[0.18em] uppercase transition-colors",
+                    isActive
+                      ? "text-[var(--color-gold)]"
+                      : "text-[var(--color-text-dim)] hover:text-[var(--color-text)]",
+                  )}
+                >
+                  {t(l.key)}
+                  {isActive && (
+                    <motion.span
+                      layoutId="navline"
+                      className="absolute -bottom-0.5 left-1/2 h-px w-6 -translate-x-1/2"
+                      style={{ background: "var(--color-gold)" }}
+                    />
+                  )}
+                </Link>
               </li>
             );
           })}

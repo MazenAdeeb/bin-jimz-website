@@ -2,8 +2,6 @@ import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { setRequestLocale, getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
-import { CursorProvider } from "@/components/cursor/cursor-context";
-import { Cursor } from "@/components/cursor/cursor";
 import { SmoothScroll } from "@/components/providers/smooth-scroll";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
@@ -38,17 +36,14 @@ export default async function LocaleLayout({
       <HtmlAttrs locale={locale} />
       <OrganizationJsonLd url={siteUrl} />
       <WebsiteJsonLd url={siteUrl} />
-      <CursorProvider>
-        <SmoothScroll>
-          <Cursor />
-          <PageTransition>
-            <Navbar />
-            <main className="pt-20">{children}</main>
-            <Footer />
-            <ChatDock />
-          </PageTransition>
-        </SmoothScroll>
-      </CursorProvider>
+      <SmoothScroll>
+        <PageTransition>
+          <Navbar />
+          <main className="pt-20">{children}</main>
+          <Footer />
+          <ChatDock />
+        </PageTransition>
+      </SmoothScroll>
     </NextIntlClientProvider>
   );
 }

@@ -2,7 +2,6 @@ import { setRequestLocale } from "next-intl/server";
 import { Section, Eyebrow, H1, Lead } from "@/components/ui/section";
 import { Reveal } from "@/components/motion/reveal";
 import { Link } from "@/i18n/navigation";
-import { HoverArea } from "@/components/cursor/hover-area";
 
 const articles = [
   {
@@ -59,32 +58,30 @@ export default async function InsightsPage({
           {articles.map((a) => (
             <Reveal key={a.slug}>
               <Link href={`/insights/${a.slug}`}>
-                <HoverArea variant="view">
-                  <article
-                    className="group overflow-hidden rounded-md border"
-                    style={{ borderColor: "rgba(200,169,106,0.18)" }}
-                  >
-                    <div
-                      className="aspect-[16/10] bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-                      style={{ backgroundImage: `url(${a.cover})` }}
-                    />
-                    <div className="p-6">
-                      <p
-                        className="font-display text-[10px] tracking-[0.32em] uppercase"
-                        style={{ color: "var(--color-gold)" }}
-                      >
-                        {a.date}
-                      </p>
-                      <h3 className="font-display mt-3 text-xl">{a.title}</h3>
-                      <p
-                        className="mt-3 text-sm leading-relaxed"
-                        style={{ color: "var(--color-text-dim)" }}
-                      >
-                        {a.excerpt}
-                      </p>
-                    </div>
-                  </article>
-                </HoverArea>
+                <article
+                  className="group overflow-hidden rounded-md border"
+                  style={{ borderColor: "rgba(200,169,106,0.18)" }}
+                >
+                  <div
+                    className="aspect-[16/10] bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                    style={{ backgroundImage: `url(${a.cover})` }}
+                  />
+                  <div className="p-6">
+                    <p
+                      className="font-display text-[10px] tracking-[0.32em] uppercase"
+                      style={{ color: "var(--color-gold)" }}
+                    >
+                      {a.date}
+                    </p>
+                    <h3 className="font-display mt-3 text-xl">{a.title}</h3>
+                    <p
+                      className="mt-3 text-sm leading-relaxed"
+                      style={{ color: "var(--color-text-dim)" }}
+                    >
+                      {a.excerpt}
+                    </p>
+                  </div>
+                </article>
               </Link>
             </Reveal>
           ))}

@@ -2,7 +2,6 @@
 
 import { cva, type VariantProps } from "class-variance-authority";
 import { forwardRef, type ButtonHTMLAttributes } from "react";
-import { Magnetic } from "@/components/cursor/magnetic";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
@@ -33,13 +32,11 @@ const buttonVariants = cva(
 
 export interface ButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
-  magnetic?: boolean;
-}
+    VariantProps<typeof buttonVariants> {}
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, magnetic = true, children, ...props }, ref) => {
-    const inner = (
+  ({ className, variant, size, children, ...props }, ref) => {
+    return (
       <button
         ref={ref}
         className={cn(buttonVariants({ variant, size }), className)}
@@ -48,8 +45,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         {children}
       </button>
     );
-    if (!magnetic || variant === "link" || variant === "ghost") return inner;
-    return <Magnetic variant="hover">{inner}</Magnetic>;
   },
 );
 Button.displayName = "Button";

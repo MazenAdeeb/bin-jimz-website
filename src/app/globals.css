@@ -82,13 +82,6 @@
     background: var(--color-base);
     color: var(--color-text);
     overflow-x: hidden;
-    cursor: none;
-  }
-
-  @media (hover: none), (pointer: coarse) {
-    body {
-      cursor: auto;
-    }
   }
 
   ::selection {

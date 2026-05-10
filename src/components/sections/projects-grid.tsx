@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Section } from "@/components/ui/section";
-import { HoverArea } from "@/components/cursor/hover-area";
 import { cn } from "@/lib/utils";
 import { allProjects } from "@/data/projects";
 
@@ -73,42 +72,40 @@ export function ProjectsGrid() {
                 transition={{ duration: 0.5 }}
               >
                 <Link href={`/projects/${p.slug}`}>
-                  <HoverArea variant="view">
-                    <article
-                      className="group relative overflow-hidden rounded-md border"
-                      style={{ borderColor: "rgba(200,169,106,0.18)" }}
-                    >
-                      <div
-                        className="aspect-[4/3] bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-                        style={{ backgroundImage: `url(${p.cover})` }}
-                      />
-                      <div
-                        className="pointer-events-none absolute inset-0"
-                        style={{
-                          background:
-                            "linear-gradient(180deg, transparent 40%, rgba(11,11,12,0.85) 100%)",
-                        }}
-                      />
-                      <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-5">
-                        <div>
-                          <p
-                            className="font-display text-[10px] tracking-[0.32em] uppercase"
-                            style={{ color: "var(--color-gold)" }}
-                          >
-                            {p.sector} · {p.service} · {p.year}
-                          </p>
-                          <h3 className="font-display mt-2 text-lg md:text-xl">
-                            {p.title}
-                          </h3>
-                        </div>
-                        <ArrowUpRight
-                          size={16}
-                          className="transition-transform group-hover:-translate-y-1 group-hover:translate-x-1"
+                  <article
+                    className="group relative overflow-hidden rounded-md border"
+                    style={{ borderColor: "rgba(200,169,106,0.18)" }}
+                  >
+                    <div
+                      className="aspect-[4/3] bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                      style={{ backgroundImage: `url(${p.cover})` }}
+                    />
+                    <div
+                      className="pointer-events-none absolute inset-0"
+                      style={{
+                        background:
+                          "linear-gradient(180deg, transparent 40%, rgba(11,11,12,0.85) 100%)",
+                      }}
+                    />
+                    <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-5">
+                      <div>
+                        <p
+                          className="font-display text-[10px] tracking-[0.32em] uppercase"
                           style={{ color: "var(--color-gold)" }}
-                        />
+                        >
+                          {p.sector} · {p.service} · {p.year}
+                        </p>
+                        <h3 className="font-display mt-2 text-lg md:text-xl">
+                          {p.title}
+                        </h3>
                       </div>
-                    </article>
-                  </HoverArea>
+                      <ArrowUpRight
+                        size={16}
+                        className="transition-transform group-hover:-translate-y-1 group-hover:translate-x-1"
+                        style={{ color: "var(--color-gold)" }}
+                      />
+                    </div>
+                  </article>
                 </Link>
               </motion.div>
             ))}

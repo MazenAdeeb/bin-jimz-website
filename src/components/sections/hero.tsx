@@ -5,7 +5,6 @@ import { ArrowDown, Sparkles } from "lucide-react";
 import dynamic from "next/dynamic";
 import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
-import { HoverArea } from "@/components/cursor/hover-area";
 
 const ShieldHero = dynamic(
   () => import("@/components/three/shield-hero").then((m) => m.ShieldHero),
@@ -83,12 +82,10 @@ export function Hero({ eyebrow, title1, title2, intro, cta, secondaryCta }: Prop
               </Button>
             </Link>
             <Link href="/chat">
-              <HoverArea variant="talk">
-                <Button variant="outline">
-                  <Sparkles size={14} />
-                  {secondaryCta}
-                </Button>
-              </HoverArea>
+              <Button variant="outline">
+                <Sparkles size={14} />
+                {secondaryCta}
+              </Button>
             </Link>
           </motion.div>
         </div>

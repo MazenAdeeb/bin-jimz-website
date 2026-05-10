@@ -1,0 +1,283 @@
+// Bin Jimz database schema
+// PostgreSQL with pgvector extension for chatbot RAG
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  extensions = [pgvector(map: "vector")]
+}
+
+enum Locale {
+  en
+  ar
+}
+
+enum Role {
+  superadmin
+  editor
+  viewer
+}
+
+enum ProjectStatus {
+  draft
+  published
+  archived
+}
+
+enum ServicePillar {
+  engineering
+  supplies
+  contracting
+  cybersecurity
+}
+
+enum LeadSource {
+  contact_form
+  chatbot
+  consultation
+  cybersecurity_assessment
+}
+
+enum LeadStatus {
+  new
+  contacted
+  qualified
+  closed_won
+  closed_lost
+}
+
+enum ChatRole {
+  user
+  assistant
+  system
+  tool
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String?
+  passwordHash  String?
+  role          Role      @default(editor)
+  emailVerified DateTime?
+  image         String?
+  cognitoSub    String?   @unique
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  accounts NewsArticle[] @relation("AuthorArticles")
+  uploads  MediaAsset[]
+}
+
+model Service {
+  id        String        @id @default(cuid())
+  pillar    ServicePillar @unique
+  slug      String        @unique
+  iconKey   String
+  order     Int           @default(0)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+
+  translations ServiceTranslation[]
+  projects     Project[]            @relation("ProjectServices")
+}
+
+model ServiceTranslation {
+  id          String  @id @default(cuid())
+  serviceId   String
+  locale      Locale
+  title       String
+  tagline     String
+  description String
+  capabilities Json   // string[]
+  process     Json    // { step, title, description }[]
+
+  service Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  @@unique([serviceId, locale])
+}
+
+model Project {
+  id           String        @id @default(cuid())
+  slug         String        @unique
+  status       ProjectStatus @default(draft)
+  featured     Boolean       @default(false)
+  year         Int
+  client       String?
+  location     String?
+  sector       String?
+  coverImageId String?
+  coverImage   MediaAsset?   @relation("ProjectCover", fields: [coverImageId], references: [id])
+  galleryIds   String[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  translations ProjectTranslation[]
+  services     Service[]            @relation("ProjectServices")
+
+  @@index([status, featured])
+  @@index([year])
+}
+
+model ProjectTranslation {
+  id        String  @id @default(cuid())
+  projectId String
+  locale    Locale
+  title     String
+  summary   String
+  scope     String
+  outcomes  String
+  tags      Json    // string[]
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@unique([projectId, locale])
+}
+
+model TeamMember {
+  id        String  @id @default(cuid())
+  slug      String  @unique
+  email     String?
+  imageId   String?
+  image     MediaAsset? @relation(fields: [imageId], references: [id])
+  order     Int     @default(0)
+  active    Boolean @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  translations TeamMemberTranslation[]
+}
+
+model TeamMemberTranslation {
+  id           String @id @default(cuid())
+  teamMemberId String
+  locale       Locale
+  name         String
+  role         String
+  bio          String
+
+  member TeamMember @relation(fields: [teamMemberId], references: [id], onDelete: Cascade)
+
+  @@unique([teamMemberId, locale])
+}
+
+model NewsArticle {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  authorId    String?
+  author      User?    @relation("AuthorArticles", fields: [authorId], references: [id])
+  coverId     String?
+  cover       MediaAsset? @relation("ArticleCover", fields: [coverId], references: [id])
+  publishedAt DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  translations NewsTranslation[]
+}
+
+model NewsTranslation {
+  id        String @id @default(cuid())
+  articleId String
+  locale    Locale
+  title     String
+  excerpt   String
+  body      String  @db.Text
+
+  article NewsArticle @relation(fields: [articleId], references: [id], onDelete: Cascade)
+
+  @@unique([articleId, locale])
+}
+
+model MediaAsset {
+  id          String   @id @default(cuid())
+  url         String
+  s3Key       String?  @unique
+  mime        String
+  width       Int?
+  height      Int?
+  bytes       Int?
+  alt         String?
+  uploadedById String?
+  uploadedBy  User?    @relation(fields: [uploadedById], references: [id])
+  createdAt   DateTime @default(now())
+
+  projectCovers Project[]      @relation("ProjectCover")
+  articleCovers NewsArticle[]  @relation("ArticleCover")
+  teamPhotos    TeamMember[]
+}
+
+model Lead {
+  id        String     @id @default(cuid())
+  source    LeadSource
+  status    LeadStatus @default(new)
+  name      String
+  email     String?
+  phone     String?
+  company   String?
+  service   String?
+  message   String?
+  metadata  Json?
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  chatSessionId String?
+  chatSession   ChatSession? @relation(fields: [chatSessionId], references: [id])
+
+  @@index([status])
+  @@index([createdAt])
+}
+
+model ChatSession {
+  id          String   @id @default(cuid())
+  visitorId   String
+  ip          String?
+  userAgent   String?
+  locale      Locale   @default(en)
+  voiceMode   Boolean  @default(false)
+  startedAt   DateTime @default(now())
+  endedAt     DateTime?
+  intentTags  String[]
+
+  messages ChatMessage[]
+  leads    Lead[]
+
+  @@index([visitorId])
+}
+
+model ChatMessage {
+  id         String   @id @default(cuid())
+  sessionId  String
+  role       ChatRole
+  content    String   @db.Text
+  toolName   String?
+  toolPayload Json?
+  tokens     Int?
+  createdAt  DateTime @default(now())
+
+  session ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@index([sessionId, createdAt])
+}
+
+model KnowledgeChunk {
+  id        String                @id @default(cuid())
+  source    String
+  sourceId  String?
+  locale    Locale                @default(en)
+  content   String                @db.Text
+  embedding Unsupported("vector(1536)")?
+  createdAt DateTime              @default(now())
+
+  @@index([source])
+}
+
+model SiteSetting {
+  key       String   @id
+  value     Json
+  updatedAt DateTime @updatedAt
+}

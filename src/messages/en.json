@@ -1,0 +1,169 @@
+{
+  "brand": {
+    "name": "Bin Jimz",
+    "tagline": "Building the future. Securing what matters.",
+    "pillars": "Engineering · Contracting · Cybersecurity"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "projects": "Projects",
+    "industries": "Industries",
+    "insights": "Insights",
+    "careers": "Careers",
+    "contact": "Contact",
+    "chat": "AI Assistant",
+    "cta": "Start a project"
+  },
+  "common": {
+    "learnMore": "Learn more",
+    "viewProject": "View project",
+    "viewAll": "View all",
+    "discoverMore": "Discover more",
+    "getInTouch": "Get in touch",
+    "scrollToExplore": "Scroll to explore",
+    "loading": "Loading"
+  },
+  "home": {
+    "heroEyebrow": "BIN JIMZ COMPANY",
+    "heroTitle": "Building the future.",
+    "heroTitle2": "Securing what matters.",
+    "heroIntro": "We bridge robust physical development with advanced digital protection — engineering, contracting and cybersecurity under one trusted roof.",
+    "heroCta": "Explore our work",
+    "heroSecondaryCta": "Talk to our AI assistant",
+    "stats": {
+      "collaborations": "Collaborations",
+      "collaborationsDesc": "Trusted by leading governments, retail brands, and supply partners.",
+      "projects": "Projects delivered",
+      "projectsDesc": "From mega-event pavilions to high-tech commercial fit-outs.",
+      "speed": "Faster delivery",
+      "speedDesc": "Average lead-time reduction across our contracting portfolio.",
+      "uptime": "Cybersecurity uptime",
+      "uptimeDesc": "On managed digital defense engagements."
+    },
+    "servicesEyebrow": "WHAT WE DO",
+    "servicesTitle": "Four pillars. One partner.",
+    "servicesIntro": "End-to-end execution that simplifies complex physical and digital challenges.",
+    "projectsEyebrow": "OUR WORK",
+    "projectsTitle": "Selected projects",
+    "essenceEyebrow": "BRAND ESSENCE",
+    "essenceTitle": "What we stand for",
+    "ctaTitle": "Have a vision? Let's build and secure it.",
+    "ctaCopy": "Tell us about your project — our team will respond within one business day.",
+    "ctaButton": "Start a conversation"
+  },
+  "essence": {
+    "trust": { "title": "Trust", "desc": "Reliable. Secure. Committed." },
+    "quality": { "title": "Quality", "desc": "Precision in every detail." },
+    "excellence": { "title": "Excellence", "desc": "Engineering the future." },
+    "speed": { "title": "Speed", "desc": "Fast. Efficient. Effective." },
+    "security": { "title": "Security", "desc": "Protecting what matters." },
+    "innovation": { "title": "Innovation", "desc": "Smart solutions. Advanced thinking." }
+  },
+  "services": {
+    "engineering": {
+      "title": "Engineering & Architectural Consulting",
+      "tagline": "Concepts into actionable blueprints.",
+      "desc": "Architectural engineering and interior/exterior design with comprehensive planning and spatial solutions."
+    },
+    "supplies": {
+      "title": "General Supplies & Sourcing",
+      "tagline": "The right materials. On time. Every time.",
+      "desc": "Procurement of premium construction materials, architectural finishes and specialized equipment."
+    },
+    "contracting": {
+      "title": "Premium Contracting & Execution",
+      "tagline": "Vision into physical reality.",
+      "desc": "Construction management and execution with unwavering focus on speed and structural integrity."
+    },
+    "cybersecurity": {
+      "title": "Advanced Cybersecurity Solutions",
+      "tagline": "Protecting your digital infrastructure.",
+      "desc": "We secure your digital assets with the same precision we apply to our engineering projects."
+    }
+  },
+  "about": {
+    "eyebrow": "ABOUT BIN JIMZ",
+    "title": "A trusted partner for those who build and protect.",
+    "intro": "At Bin Jimz, we bridge the gap between robust physical development and advanced digital protection. Our reputation is built on uncompromised quality, rapid turnaround speed, and pinpoint precision.",
+    "visionTitle": "Vision",
+    "vision": "To redefine industry standards across engineering, construction, and digital defense by setting the ultimate benchmark for flawless and rapid execution.",
+    "missionTitle": "Mission",
+    "mission": "To provide comprehensive, end-to-end solutions that bridge physical development and cyber protection. We source, build, consult, and secure — ensuring our clients' operations thrive through unwavering dedication to rapid turnaround, exact precision, and top-tier quality.",
+    "goalsTitle": "Our goals",
+    "goalsIntro": "Strategic, operational and client-centric.",
+    "goal1Title": "Market leadership",
+    "goal1Desc": "Establish Bin Jimz as the premier regional partner for integrated engineering, construction and cybersecurity.",
+    "goal2Title": "Accelerated delivery",
+    "goal2Desc": "Consistently deliver consulting and contracting projects ahead of schedule — without compromising safety.",
+    "goal3Title": "Tailored solutions",
+    "goal3Desc": "Provide highly customized, end-to-end project management that simplifies complex challenges for clients.",
+    "advantageTitle": "Competitive advantage",
+    "advEfficiency": "Streamlined, multi-disciplinary execution under one roof for maximum speed and exact precision.",
+    "advQuality": "Uncompromising technical excellence — from premium material sourcing to elite architectural engineering.",
+    "advCustomer": "A single, trusted partner dedicated to simplifying complex physical and digital challenges through tailored solutions.",
+    "advInnovation": "Future-proofing your investments by integrating robust physical construction with advanced digital defense."
+  },
+  "projects": {
+    "title": "Projects",
+    "intro": "Selected work across engineering, contracting and cybersecurity.",
+    "filterAll": "All",
+    "filterSector": "Sector",
+    "filterYear": "Year",
+    "filterService": "Service",
+    "empty": "No projects match your filters yet."
+  },
+  "contact": {
+    "title": "Get in touch",
+    "intro": "Tell us about your project. Our team will respond within one business day.",
+    "name": "Full name",
+    "email": "Work email",
+    "phone": "Phone (optional)",
+    "company": "Company (optional)",
+    "service": "Service of interest",
+    "message": "How can we help?",
+    "submit": "Send message",
+    "submitting": "Sending…",
+    "success": "Thank you. We'll be in touch shortly.",
+    "error": "Something went wrong. Please try again.",
+    "address": "Nasr City St., Cairo, Egypt",
+    "phoneLabel": "Phone",
+    "emailLabel": "Email",
+    "addressLabel": "Office"
+  },
+  "chat": {
+    "open": "Open AI assistant",
+    "close": "Close",
+    "title": "Jimz · AI Assistant",
+    "subtitle": "Ask about our services, projects, or request a consultation.",
+    "placeholder": "Ask a question…",
+    "send": "Send",
+    "voiceStart": "Hold to speak",
+    "voiceStop": "Release to send",
+    "listening": "Listening…",
+    "thinking": "Thinking…",
+    "speaking": "Speaking…",
+    "consent": "By chatting you agree to our privacy policy.",
+    "starter1": "What services do you offer?",
+    "starter2": "Show me recent projects.",
+    "starter3": "I need a cybersecurity assessment.",
+    "starter4": "Book a consultation."
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "language": "Language"
+  },
+  "industries": {
+    "title": "Industries we serve",
+    "intro": "Government entities, global retail brands and top-tier enterprises trust Bin Jimz to deliver integrated, secure outcomes.",
+    "government": "Government",
+    "retail": "Retail",
+    "events": "Mega Events",
+    "commercial": "Commercial Fit-Outs",
+    "energy": "Energy & Utilities",
+    "finance": "Banking & Finance"
+  }
+}

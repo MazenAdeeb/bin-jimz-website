@@ -1,11 +1,21 @@
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { BrandMark } from "@/components/ui/brand-mark";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, MessageCircle } from "lucide-react";
+import { getSiteContent } from "@/lib/site-content";
 
-export function Footer() {
-  const t = useTranslations();
+function toWaNumber(raw: string) {
+  let digits = raw.replace(/\D/g, "");
+  if (digits.startsWith("0")) digits = digits.slice(1);
+  if (!digits.startsWith("20")) digits = `20${digits}`;
+  return digits;
+}
+
+export async function Footer() {
+  const t = await getTranslations();
   const year = new Date().getFullYear();
+  const content = await getSiteContent();
+  const waHref = `https://wa.me/${toWaNumber(content.contact.whatsapp)}`;
 
   return (
     <footer className="relative border-t border-white/5 bg-[var(--color-surface-2)]">
@@ -66,6 +76,12 @@ export function Footer() {
               <li className="flex items-start gap-2">
                 <Phone size={14} className="mt-1 shrink-0" />
                 <a href="tel:+201010429021">+20 10 10429021</a>
+              </li>
+              <li className="flex items-start gap-2">
+                <MessageCircle size={14} className="mt-1 shrink-0" />
+                <a href={waHref} target="_blank" rel="noopener noreferrer">
+                  WhatsApp
+                </a>
               </li>
               <li className="flex items-start gap-2">
                 <MapPin size={14} className="mt-1 shrink-0" />

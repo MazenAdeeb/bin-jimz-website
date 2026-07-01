@@ -9,7 +9,7 @@ export function OrganizationJsonLd({ url }: Props) {
     name: "Bin Jimz",
     legalName: "Bin Jimz Company",
     url,
-    logo: `${url}/favicon.svg`,
+    logo: `${url}/brand/bin-jimz-mark.png`,
     slogan: "Building the future. Securing what matters.",
     description:
       "Engineering, contracting and cybersecurity solutions delivered with speed, precision and uncompromised quality.",

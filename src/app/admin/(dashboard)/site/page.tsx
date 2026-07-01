@@ -39,6 +39,25 @@ async function update(fd: FormData) {
       eyebrow: { en: get("projects.eyebrow.en"), ar: get("projects.eyebrow.ar") },
       title: { en: get("projects.title.en"), ar: get("projects.title.ar") },
     },
+    process: {
+      eyebrow: { en: get("process.eyebrow.en"), ar: get("process.eyebrow.ar") },
+      title: { en: get("process.title.en"), ar: get("process.title.ar") },
+      intro: { en: get("process.intro.en"), ar: get("process.intro.ar") },
+      ctaLabel: {
+        en: get("process.ctaLabel.en"),
+        ar: get("process.ctaLabel.ar"),
+      },
+      steps: [0, 1, 2, 3].map((i) => ({
+        title: {
+          en: get(`process.steps.${i}.title.en`),
+          ar: get(`process.steps.${i}.title.ar`),
+        },
+        desc: {
+          en: get(`process.steps.${i}.desc.en`),
+          ar: get(`process.steps.${i}.desc.ar`),
+        },
+      })),
+    },
     essence: {
       eyebrow: { en: get("essence.eyebrow.en"), ar: get("essence.eyebrow.ar") },
       title: { en: get("essence.title.en"), ar: get("essence.title.ar") },
@@ -51,6 +70,7 @@ async function update(fd: FormData) {
     contact: {
       email: get("contact.email"),
       phone: get("contact.phone"),
+      whatsapp: get("contact.whatsapp"),
       address: { en: get("contact.address.en"), ar: get("contact.address.ar") },
     },
   };
@@ -173,6 +193,46 @@ export default async function SiteContentPage({
           <Pair label="Title" en={c.projects.title.en} ar={c.projects.title.ar} prefix="projects.title" />
         </SectionGroup>
 
+        <SectionGroup title="Process section (homepage + project pages)">
+          <Pair label="Eyebrow" en={c.process.eyebrow.en} ar={c.process.eyebrow.ar} prefix="process.eyebrow" />
+          <Pair label="Title" en={c.process.title.en} ar={c.process.title.ar} prefix="process.title" />
+          <Pair
+            label="Intro"
+            en={c.process.intro.en}
+            ar={c.process.intro.ar}
+            prefix="process.intro"
+            textarea
+          />
+          <Pair
+            label="Landing-page button label (scrolls to this section)"
+            en={c.process.ctaLabel.en}
+            ar={c.process.ctaLabel.ar}
+            prefix="process.ctaLabel"
+          />
+          {c.process.steps.map((s, i) => (
+            <div
+              key={i}
+              className="rounded-md border p-5"
+              style={{ borderColor: "rgba(200,169,106,0.18)" }}
+            >
+              <p
+                className="font-display text-[10px] tracking-[0.22em] uppercase"
+                style={{ color: "var(--color-gold)" }}
+              >
+                Step #{i + 1}
+              </p>
+              <Pair label="Title" en={s.title.en} ar={s.title.ar} prefix={`process.steps.${i}.title`} />
+              <Pair
+                label="Description"
+                en={s.desc.en}
+                ar={s.desc.ar}
+                prefix={`process.steps.${i}.desc`}
+                textarea
+              />
+            </div>
+          ))}
+        </SectionGroup>
+
         <SectionGroup title="Essence section">
           <Pair label="Eyebrow" en={c.essence.eyebrow.en} ar={c.essence.eyebrow.ar} prefix="essence.eyebrow" />
           <Pair label="Title" en={c.essence.title.en} ar={c.essence.title.ar} prefix="essence.title" />
@@ -194,6 +254,11 @@ export default async function SiteContentPage({
           <Bilingual single>
             <Field name="contact.email" label="Email" defaultValue={c.contact.email} />
             <Field name="contact.phone" label="Phone" defaultValue={c.contact.phone} />
+            <Field
+              name="contact.whatsapp"
+              label="WhatsApp number (local format, e.g. 01113660749)"
+              defaultValue={c.contact.whatsapp}
+            />
           </Bilingual>
           <Pair
             label="Address"

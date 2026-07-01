@@ -77,6 +77,43 @@ export default async function ProjectDetailPage({
       <Section className="border-t border-white/5">
         <div className="grid gap-12 md:grid-cols-12">
           <div className="md:col-span-4">
+            <Eyebrow>Phases</Eyebrow>
+            <H3 className="mt-3">How we delivered it</H3>
+          </div>
+          <div className="md:col-span-8">
+            <div className="grid gap-5 sm:grid-cols-2">
+              {content.process.steps.map((s, i) => (
+                <div
+                  key={i}
+                  className="rounded-md border p-6"
+                  style={{
+                    borderColor: "rgba(200, 169, 106, 0.15)",
+                    background: "rgba(255,255,255,0.015)",
+                  }}
+                >
+                  <span
+                    className="font-display text-2xl"
+                    style={{ color: "var(--color-gold)" }}
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <h4 className="font-display mt-3 text-base">{s.title[lang]}</h4>
+                  <p
+                    className="mt-2 text-sm leading-relaxed"
+                    style={{ color: "var(--color-text-dim)" }}
+                  >
+                    {s.desc[lang]}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      <Section className="border-t border-white/5">
+        <div className="grid gap-12 md:grid-cols-12">
+          <div className="md:col-span-4">
             <Eyebrow>Outcomes</Eyebrow>
             <H3 className="mt-3">The impact</H3>
           </div>

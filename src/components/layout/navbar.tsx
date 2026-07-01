@@ -50,7 +50,7 @@ export function Navbar() {
     >
       <nav className="mx-auto flex h-20 max-w-[1480px] items-center justify-between px-6 md:px-10">
         <Link href="/" aria-label="Bin Jimz home">
-          <BrandMark size={36} />
+          <BrandMark size={24} />
         </Link>
 
         <ul className="hidden items-center gap-1 lg:flex">

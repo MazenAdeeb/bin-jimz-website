@@ -76,7 +76,7 @@ export function ServicesGrid({ eyebrow, title, intro, learnMore }: Props) {
                     />
                   </div>
 
-                  <h3 className="font-display mt-8 text-2xl md:text-3xl">
+                  <h3 className="font-display mt-8 text-2xl md:text-3xl md:min-h-[4.5rem]">
                     {tServices(`${p.key}.title`)}
                   </h3>
                   <p

@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     description: "Engineering, contracting and cybersecurity under one trusted partner.",
   },
   twitter: { card: "summary_large_image" },
-  icons: { icon: "/favicon.svg" },
+  icons: { icon: "/favicon.png" },
 };
 
 export default function RootLayout({

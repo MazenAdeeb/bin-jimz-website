@@ -2,14 +2,9 @@
 
 import { motion } from "framer-motion";
 import { ArrowDown, Sparkles } from "lucide-react";
-import dynamic from "next/dynamic";
+import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
-
-const ShieldHero = dynamic(
-  () => import("@/components/three/shield-hero").then((m) => m.ShieldHero),
-  { ssr: false, loading: () => <div className="h-full w-full" /> },
-);
 
 type Props = {
   eyebrow: string;
@@ -18,9 +13,18 @@ type Props = {
   intro: string;
   cta: string;
   secondaryCta: string;
+  processCta: string;
 };
 
-export function Hero({ eyebrow, title1, title2, intro, cta, secondaryCta }: Props) {
+export function Hero({
+  eyebrow,
+  title1,
+  title2,
+  intro,
+  cta,
+  secondaryCta,
+  processCta,
+}: Props) {
   return (
     <section className="relative h-[100svh] min-h-[760px] w-full overflow-hidden">
       <div className="absolute inset-0 grid-bg opacity-50" />
@@ -32,11 +36,26 @@ export function Hero({ eyebrow, title1, title2, intro, cta, secondaryCta }: Prop
         }}
       />
       <div className="absolute right-[-8%] top-1/2 hidden h-[80%] w-[60%] -translate-y-1/2 lg:block">
-        <ShieldHero className="h-full w-full" />
+        <div
+          className="relative h-full w-full"
+          style={{
+            WebkitMaskImage:
+              "linear-gradient(to right, transparent 0%, black 70%)",
+            maskImage: "linear-gradient(to right, transparent 0%, black 70%)",
+          }}
+        >
+          <Image
+            src="/brand/bin-jimz-mark.png"
+            alt=""
+            fill
+            className="object-contain"
+            priority
+          />
+        </div>
       </div>
 
       <div className="relative z-10 mx-auto flex h-full max-w-[1480px] items-center px-6 md:px-10">
-        <div className="max-w-2xl">
+        <div className="max-w-2xl pb-40 lg:pb-0">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
@@ -87,6 +106,12 @@ export function Hero({ eyebrow, title1, title2, intro, cta, secondaryCta }: Prop
                 {secondaryCta}
               </Button>
             </Link>
+            <a href="#process" className="inline-flex">
+              <Button variant="link" type="button">
+                {processCta}
+                <ArrowDown size={12} />
+              </Button>
+            </a>
           </motion.div>
         </div>
       </div>

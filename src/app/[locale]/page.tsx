@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Hero } from "@/components/sections/hero";
 import { Stats } from "@/components/sections/stats";
 import { ServicesGrid } from "@/components/sections/services-grid";
+import { Process } from "@/components/sections/process";
 import { FeaturedProjects, type FeaturedProject } from "@/components/sections/featured-projects";
 import { Essence } from "@/components/sections/essence";
 import { Cta } from "@/components/sections/cta";
@@ -86,6 +87,7 @@ export default async function HomePage({
         intro={content.hero.intro[lang]}
         cta={content.hero.cta[lang]}
         secondaryCta={content.hero.secondaryCta[lang]}
+        processCta={content.process.ctaLabel[lang]}
       />
       <Stats
         items={content.stats.map((s) => ({
@@ -101,6 +103,15 @@ export default async function HomePage({
         title={content.services.title[lang]}
         intro={content.services.intro[lang]}
         learnMore={t("learnMore")}
+      />
+      <Process
+        eyebrow={content.process.eyebrow[lang]}
+        title={content.process.title[lang]}
+        intro={content.process.intro[lang]}
+        steps={content.process.steps.map((s) => ({
+          title: s.title[lang],
+          desc: s.desc[lang],
+        }))}
       />
       <FeaturedProjects
         eyebrow={content.projects.eyebrow[lang]}

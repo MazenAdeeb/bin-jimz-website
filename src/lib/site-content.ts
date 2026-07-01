@@ -25,6 +25,16 @@ export type SiteContent = {
     eyebrow: { en: string; ar: string };
     title: { en: string; ar: string };
   };
+  process: {
+    eyebrow: { en: string; ar: string };
+    title: { en: string; ar: string };
+    intro: { en: string; ar: string };
+    ctaLabel: { en: string; ar: string };
+    steps: Array<{
+      title: { en: string; ar: string };
+      desc: { en: string; ar: string };
+    }>;
+  };
   essence: {
     eyebrow: { en: string; ar: string };
     title: { en: string; ar: string };
@@ -37,6 +47,7 @@ export type SiteContent = {
   contact: {
     email: string;
     phone: string;
+    whatsapp: string;
     address: { en: string; ar: string };
   };
 };
@@ -104,6 +115,45 @@ export const defaultContent: SiteContent = {
     eyebrow: { en: "OUR WORK", ar: "أعمالنا" },
     title: { en: "Selected projects", ar: "مشاريع مختارة" },
   },
+  process: {
+    eyebrow: { en: "HOW WE WORK", ar: "كيف نعمل" },
+    title: { en: "Our process", ar: "آلية عملنا" },
+    intro: {
+      en: "A disciplined, four-stage methodology that keeps every project — and every client — on schedule.",
+      ar: "منهجية منضبطة من أربع مراحل تحافظ على التزام كل مشروع وكل عميل بالجدول الزمني.",
+    },
+    ctaLabel: { en: "See our process", ar: "شاهد خطوات العمل" },
+    steps: [
+      {
+        title: { en: "Discovery & Planning", ar: "اكتشاف وتخطيط" },
+        desc: {
+          en: "We study your goals, site and constraints to shape a clear, actionable roadmap.",
+          ar: "ندرس أهدافكم والموقع والمتطلبات لنضع خارطة طريق واضحة وقابلة للتنفيذ.",
+        },
+      },
+      {
+        title: { en: "Design & Engineering", ar: "تصميم وهندسة" },
+        desc: {
+          en: "Architectural and technical drawings, material specs and compliance sign-off.",
+          ar: "مخططات معمارية وهندسية، مواصفات المواد، واعتمادات الالتزام.",
+        },
+      },
+      {
+        title: { en: "Execution & Contracting", ar: "تنفيذ ومقاولات" },
+        desc: {
+          en: "On-site delivery with rigorous quality control and transparent progress tracking.",
+          ar: "تنفيذ ميداني مع ضبط جودة صارم ومتابعة شفافة لسير العمل.",
+        },
+      },
+      {
+        title: { en: "Handover & Support", ar: "تسليم ودعم" },
+        desc: {
+          en: "Final inspection, documentation and ongoing support after go-live.",
+          ar: "معاينة نهائية وتوثيق ودعم مستمر بعد التشغيل.",
+        },
+      },
+    ],
+  },
   essence: {
     eyebrow: { en: "BRAND ESSENCE", ar: "جوهر العلامة" },
     title: { en: "What we stand for", ar: "ما نمثله" },
@@ -122,6 +172,7 @@ export const defaultContent: SiteContent = {
   contact: {
     email: "m.mostafa@binjimz.com",
     phone: "+20 10 10429021",
+    whatsapp: "01113660749",
     address: {
       en: "Nasr City St., Cairo, Egypt",
       ar: "مدينة نصر، القاهرة، مصر",
@@ -158,6 +209,11 @@ function mergeContent(a: SiteContent, b: Partial<SiteContent>): SiteContent {
     stats: b.stats ?? a.stats,
     services: { ...a.services, ...(b.services ?? {}) },
     projects: { ...a.projects, ...(b.projects ?? {}) },
+    process: {
+      ...a.process,
+      ...(b.process ?? {}),
+      steps: b.process?.steps ?? a.process.steps,
+    },
     essence: { ...a.essence, ...(b.essence ?? {}) },
     cta: { ...a.cta, ...(b.cta ?? {}) },
     contact: { ...a.contact, ...(b.contact ?? {}) },

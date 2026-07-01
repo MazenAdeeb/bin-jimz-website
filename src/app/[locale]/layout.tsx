@@ -5,6 +5,7 @@ import { routing } from "@/i18n/routing";
 import { SmoothScroll } from "@/components/providers/smooth-scroll";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
+import { WhatsAppButton } from "@/components/layout/whatsapp-button";
 import { ChatDock } from "@/components/chat/chat-dock";
 import { PageTransition } from "@/components/motion/page-transition";
 import { HtmlAttrs } from "@/components/providers/html-attrs";
@@ -41,6 +42,7 @@ export default async function LocaleLayout({
           <Navbar />
           <main className="pt-20">{children}</main>
           <Footer />
+          <WhatsAppButton />
           <ChatDock />
         </PageTransition>
       </SmoothScroll>

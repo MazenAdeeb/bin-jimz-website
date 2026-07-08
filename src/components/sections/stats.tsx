@@ -18,8 +18,8 @@ export function Stats({ items, locale }: { items: Stat[]; locale: string }) {
         {items.map((s, i) => (
           <StaggerItem key={i}>
             <div>
-              <div className="font-display flex items-baseline gap-1 text-5xl md:text-6xl">
-                <span className="gold-text">
+              <div className="font-display flex items-baseline gap-1 text-5xl leading-[1.35] md:text-6xl">
+                <span className="gold-text inline-block py-[0.08em]">
                   <Counter value={s.value} suffix={s.suffix} locale={locale} />
                 </span>
               </div>

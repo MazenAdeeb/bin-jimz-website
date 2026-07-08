@@ -36,10 +36,10 @@ export function ServicesGrid({ eyebrow, title, intro, learnMore }: Props) {
           const Icon = p.icon;
           const isCyber = p.accent === "cyber";
           return (
-            <StaggerItem key={p.key}>
-              <Link href={p.href}>
+            <StaggerItem key={p.key} className="h-full">
+              <Link href={p.href} className="block h-full">
                 <div
-                  className="group relative overflow-hidden rounded-md border p-8 transition-all duration-500 hover:border-[var(--color-gold)] md:p-10"
+                  className="group relative flex h-full flex-col overflow-hidden rounded-md border p-8 transition-all duration-500 hover:border-[var(--color-gold)] md:p-10"
                   style={{
                     borderColor: "rgba(200, 169, 106, 0.15)",
                     background: "rgba(255,255,255,0.015)",
@@ -92,7 +92,7 @@ export function ServicesGrid({ eyebrow, title, intro, learnMore }: Props) {
                     {tServices(`${p.key}.desc`)}
                   </p>
                   <p
-                    className="font-display mt-6 inline-flex items-center gap-2 text-[11px] tracking-[0.22em] uppercase opacity-70 transition-opacity group-hover:opacity-100"
+                    className="font-display mt-auto inline-flex items-center gap-2 pt-6 text-[11px] tracking-[0.22em] uppercase opacity-70 transition-opacity group-hover:opacity-100"
                     style={{ color: isCyber ? "var(--color-cyber)" : "var(--color-gold)" }}
                   >
                     {learnMore}{" "}

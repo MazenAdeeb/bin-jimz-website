@@ -1,4 +1,4 @@
-import { setRequestLocale } from "next-intl/server";
+import { setRequestLocale, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { Section, Eyebrow, H1, H3 } from "@/components/ui/section";
@@ -6,6 +6,7 @@ import { Reveal } from "@/components/motion/reveal";
 import { Cta } from "@/components/sections/cta";
 import { allProjects } from "@/data/projects";
 import { getSiteContent } from "@/lib/site-content";
+import { serviceLabel, sectorLabel } from "@/lib/labels";
 
 export function generateStaticParams() {
   return allProjects.flatMap((p) =>
@@ -25,21 +26,23 @@ export default async function ProjectDetailPage({
 
   const lang = locale === "ar" ? "ar" : "en";
   const content = await getSiteContent();
+  const t = await getTranslations("projectDetail");
+  const title = project.title[lang];
 
   return (
     <>
       <Section className="!pt-32 !pb-12">
         <Reveal>
           <Eyebrow>
-            {project.sector} · {project.service}
+            {sectorLabel(project.sector, lang)} · {serviceLabel(project.service, lang)}
           </Eyebrow>
-          <H1 className="mt-6 max-w-4xl">{project.title}</H1>
+          <H1 className="mt-6 max-w-4xl">{title}</H1>
           {project.location && (
             <p
               className="mt-4 text-sm tracking-[0.04em]"
               style={{ color: "var(--color-text-dim)" }}
             >
-              {project.location}
+              {project.location[lang]}
             </p>
           )}
         </Reveal>
@@ -50,7 +53,7 @@ export default async function ProjectDetailPage({
           <div className="relative aspect-[16/9] w-full overflow-hidden rounded-md">
             <Image
               src={project.cover}
-              alt={project.title}
+              alt={title}
               fill
               className="object-cover"
               priority
@@ -59,26 +62,28 @@ export default async function ProjectDetailPage({
         </Reveal>
       </Section>
 
-      <Section className="border-t border-white/5">
-        <div className="grid gap-12 md:grid-cols-12">
-          <div className="md:col-span-4">
-            <Eyebrow>Scope</Eyebrow>
-            <H3 className="mt-3">What we did</H3>
+      {project.scope && (
+        <Section className="border-t border-white/5">
+          <div className="grid gap-12 md:grid-cols-12">
+            <div className="md:col-span-4">
+              <Eyebrow>{t("scopeEyebrow")}</Eyebrow>
+              <H3 className="mt-3">{t("scopeTitle")}</H3>
+            </div>
+            <div className="md:col-span-8">
+              <p className="text-base leading-relaxed md:text-lg"
+                 style={{ color: "var(--color-text-dim)" }}>
+                {project.scope[lang]}
+              </p>
+            </div>
           </div>
-          <div className="md:col-span-8">
-            <p className="text-base leading-relaxed md:text-lg"
-               style={{ color: "var(--color-text-dim)" }}>
-              {project.scope}
-            </p>
-          </div>
-        </div>
-      </Section>
+        </Section>
+      )}
 
       <Section className="border-t border-white/5">
         <div className="grid gap-12 md:grid-cols-12">
           <div className="md:col-span-4">
-            <Eyebrow>Phases</Eyebrow>
-            <H3 className="mt-3">How we delivered it</H3>
+            <Eyebrow>{t("phasesEyebrow")}</Eyebrow>
+            <H3 className="mt-3">{t("phasesTitle")}</H3>
           </div>
           <div className="md:col-span-8">
             <div className="grid gap-5 sm:grid-cols-2">
@@ -111,24 +116,26 @@ export default async function ProjectDetailPage({
         </div>
       </Section>
 
-      <Section className="border-t border-white/5">
-        <div className="grid gap-12 md:grid-cols-12">
-          <div className="md:col-span-4">
-            <Eyebrow>Outcomes</Eyebrow>
-            <H3 className="mt-3">The impact</H3>
+      {project.outcomes && (
+        <Section className="border-t border-white/5">
+          <div className="grid gap-12 md:grid-cols-12">
+            <div className="md:col-span-4">
+              <Eyebrow>{t("outcomesEyebrow")}</Eyebrow>
+              <H3 className="mt-3">{t("outcomesTitle")}</H3>
+            </div>
+            <div className="md:col-span-8">
+              <p className="text-base leading-relaxed md:text-lg"
+                 style={{ color: "var(--color-text-dim)" }}>
+                {project.outcomes[lang]}
+              </p>
+            </div>
           </div>
-          <div className="md:col-span-8">
-            <p className="text-base leading-relaxed md:text-lg"
-               style={{ color: "var(--color-text-dim)" }}>
-              {project.outcomes}
-            </p>
-          </div>
-        </div>
-      </Section>
+        </Section>
+      )}
 
       {project.gallery && project.gallery.length > 0 && (
         <Section className="border-t border-white/5">
-          <Eyebrow>Gallery</Eyebrow>
+          <Eyebrow>{t("gallery")}</Eyebrow>
           <div className="mt-8 grid gap-4 md:grid-cols-2">
             {project.gallery.map((src, i) => (
               <Reveal key={src} delay={i * 0.05}>

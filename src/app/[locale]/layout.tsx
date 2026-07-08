@@ -8,7 +8,6 @@ import { Footer } from "@/components/layout/footer";
 import { WhatsAppButton } from "@/components/layout/whatsapp-button";
 import { ChatDock } from "@/components/chat/chat-dock";
 import { PageTransition } from "@/components/motion/page-transition";
-import { HtmlAttrs } from "@/components/providers/html-attrs";
 import {
   OrganizationJsonLd,
   WebsiteJsonLd,
@@ -34,7 +33,6 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider messages={messages}>
-      <HtmlAttrs locale={locale} />
       <OrganizationJsonLd url={siteUrl} />
       <WebsiteJsonLd url={siteUrl} />
       <SmoothScroll>

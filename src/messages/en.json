@@ -14,7 +14,10 @@
     "careers": "Careers",
     "contact": "Contact",
     "chat": "AI Assistant",
-    "cta": "Start a project"
+    "cta": "Start a project",
+    "homeAria": "Bin Jimz home",
+    "switchLanguage": "Switch language",
+    "openMenu": "Open menu"
   },
   "common": {
     "learnMore": "Learn more",
@@ -23,6 +26,7 @@
     "discoverMore": "Discover more",
     "getInTouch": "Get in touch",
     "scrollToExplore": "Scroll to explore",
+    "scroll": "scroll",
     "loading": "Loading"
   },
   "home": {
@@ -100,6 +104,11 @@
     "goal3Title": "Tailored solutions",
     "goal3Desc": "Provide highly customized, end-to-end project management that simplifies complex challenges for clients.",
     "advantageTitle": "Competitive advantage",
+    "whyTitle": "Why Bin Jimz",
+    "advEfficiencyTitle": "Efficiency",
+    "advQualityTitle": "Quality",
+    "advCustomerTitle": "Customer-first",
+    "advInnovationTitle": "Innovation",
     "advEfficiency": "Streamlined, multi-disciplinary execution under one roof for maximum speed and exact precision.",
     "advQuality": "Uncompromising technical excellence — from premium material sourcing to elite architectural engineering.",
     "advCustomer": "A single, trusted partner dedicated to simplifying complex physical and digital challenges through tailored solutions.",
@@ -107,6 +116,7 @@
   },
   "projects": {
     "title": "Projects",
+    "eyebrow": "PORTFOLIO",
     "intro": "Selected work across engineering, contracting and cybersecurity.",
     "filterAll": "All",
     "filterService": "Service",
@@ -126,8 +136,18 @@
     },
     "empty": "No projects match your filters yet."
   },
+  "projectDetail": {
+    "scopeEyebrow": "Scope",
+    "scopeTitle": "What we did",
+    "phasesEyebrow": "Phases",
+    "phasesTitle": "How we delivered it",
+    "outcomesEyebrow": "Outcomes",
+    "outcomesTitle": "The impact",
+    "gallery": "Gallery"
+  },
   "contact": {
     "title": "Get in touch",
+    "eyebrow": "CONTACT",
     "intro": "Tell us about your project. Our team will respond within one business day.",
     "name": "Full name",
     "email": "Work email",
@@ -147,6 +167,9 @@
   "chat": {
     "open": "Open AI assistant",
     "close": "Close",
+    "eyebrow": "JIMZ · AI ASSISTANT",
+    "toggleVoice": "Toggle voice replies",
+    "whatsappAria": "Chat with us on WhatsApp",
     "title": "Jimz · AI Assistant",
     "subtitle": "Ask about our services, projects, or request a consultation.",
     "placeholder": "Ask a question…",
@@ -169,6 +192,7 @@
     "language": "Language"
   },
   "industries": {
+    "eyebrow": "SECTORS",
     "title": "Industries we serve",
     "intro": "Government entities, global retail brands and top-tier enterprises trust Bin Jimz to deliver integrated, secure outcomes.",
     "government": "Government",
@@ -176,6 +200,12 @@
     "events": "Mega Events",
     "commercial": "Commercial Fit-Outs",
     "energy": "Energy & Utilities",
-    "finance": "Banking & Finance"
+    "finance": "Banking & Finance",
+    "governmentDesc": "Pavilions, public infrastructure and secure operations centers.",
+    "retailDesc": "Flagship stores, premium fit-outs and unified payments security.",
+    "eventsDesc": "Mega-event architecture, AV integration and rapid mobilization.",
+    "commercialDesc": "Corporate HQs, smart-building integration and workplace design.",
+    "energyDesc": "OT/IT convergence and critical infrastructure protection.",
+    "financeDesc": "SOC build-outs, zero-trust networks and regulatory compliance."
   }
 }

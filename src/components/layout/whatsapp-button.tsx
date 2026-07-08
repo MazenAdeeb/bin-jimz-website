@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import { getSiteContent } from "@/lib/site-content";
 
 function toWaNumber(raw: string) {
@@ -9,6 +10,7 @@ function toWaNumber(raw: string) {
 
 export async function WhatsAppButton() {
   const content = await getSiteContent();
+  const t = await getTranslations("chat");
   const href = `https://wa.me/${toWaNumber(content.contact.whatsapp)}`;
 
   return (
@@ -17,7 +19,7 @@ export async function WhatsAppButton() {
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Chat with us on WhatsApp"
+        aria-label={t("whatsappAria")}
         className="group relative flex h-14 w-14 items-center justify-center rounded-full transition-transform duration-300 hover:scale-105"
         style={{
           background: "linear-gradient(135deg, #128c4a 0%, #25d366 55%, #4ce187 100%)",

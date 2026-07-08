@@ -49,7 +49,7 @@ export function Navbar() {
       )}
     >
       <nav className="mx-auto flex h-20 max-w-[1480px] items-center justify-between px-6 md:px-10">
-        <Link href="/" aria-label="Bin Jimz home">
+        <Link href="/" aria-label={t("homeAria")}>
           <BrandMark size={24} />
         </Link>
 
@@ -88,7 +88,7 @@ export function Navbar() {
           <button
             onClick={switchLocale}
             className="hidden items-center gap-2 px-3 py-2 text-[10px] tracking-[0.18em] uppercase text-[var(--color-text-dim)] transition-colors hover:text-[var(--color-gold)] md:inline-flex"
-            aria-label="Switch language"
+            aria-label={t("switchLanguage")}
           >
             <Globe size={14} />
             {locale === "en" ? "العربية" : "English"}
@@ -103,7 +103,7 @@ export function Navbar() {
           <button
             onClick={() => setOpen((o) => !o)}
             className="lg:hidden p-2 text-[var(--color-text)]"
-            aria-label="Open menu"
+            aria-label={t("openMenu")}
           >
             {open ? <X size={22} /> : <Menu size={22} />}
           </button>

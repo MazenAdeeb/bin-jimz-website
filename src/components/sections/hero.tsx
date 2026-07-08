@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useLocale, useTranslations } from "next-intl";
 import { ArrowDown, Sparkles } from "lucide-react";
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
@@ -25,6 +26,13 @@ export function Hero({
   secondaryCta,
   processCta,
 }: Props) {
+  const isRtl = useLocale() === "ar";
+  const tc = useTranslations("common");
+  // In RTL the hero text sits on the right, so the decorative shield moves to
+  // the left and its opacity fade flips to fade toward the text (rightward).
+  const mask = isRtl
+    ? "linear-gradient(to left, transparent 0%, black 70%)"
+    : "linear-gradient(to right, transparent 0%, black 70%)";
   return (
     <section className="relative h-[100svh] min-h-[760px] w-full overflow-hidden">
       <div className="absolute inset-0 grid-bg opacity-50" />
@@ -35,13 +43,16 @@ export function Hero({
             "radial-gradient(ellipse at center, transparent 0%, transparent 40%, var(--color-base) 100%)",
         }}
       />
-      <div className="absolute right-[-8%] top-1/2 hidden h-[80%] w-[60%] -translate-y-1/2 lg:block">
+      <div
+        className={`absolute top-1/2 hidden h-[80%] w-[60%] -translate-y-1/2 lg:block ${
+          isRtl ? "left-[-8%]" : "right-[-8%]"
+        }`}
+      >
         <div
           className="relative h-full w-full"
           style={{
-            WebkitMaskImage:
-              "linear-gradient(to right, transparent 0%, black 70%)",
-            maskImage: "linear-gradient(to right, transparent 0%, black 70%)",
+            WebkitMaskImage: mask,
+            maskImage: mask,
           }}
         >
           <Image
@@ -131,7 +142,7 @@ export function Hero({
             animate={{ y: [0, 4, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           >
-            scroll
+            {tc("scroll")}
           </motion.span>
         </div>
       </motion.div>

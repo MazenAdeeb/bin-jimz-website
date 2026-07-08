@@ -95,7 +95,8 @@ export function ServicesGrid({ eyebrow, title, intro, learnMore }: Props) {
                     className="font-display mt-6 inline-flex items-center gap-2 text-[11px] tracking-[0.22em] uppercase opacity-70 transition-opacity group-hover:opacity-100"
                     style={{ color: isCyber ? "var(--color-cyber)" : "var(--color-gold)" }}
                   >
-                    {learnMore} →
+                    {learnMore}{" "}
+                    <span className="inline-block rtl:-scale-x-100">→</span>
                   </p>
                 </div>
               </Link>

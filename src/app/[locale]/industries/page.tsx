@@ -13,25 +13,19 @@ export default async function IndustriesPage({
   const t = await getTranslations("industries");
 
   const items = [
-    { icon: Landmark, key: "government" as const,
-      desc: "Pavilions, public infrastructure and secure operations centers." },
-    { icon: ShoppingBag, key: "retail" as const,
-      desc: "Flagship stores, premium fit-outs and unified payments security." },
-    { icon: Sparkles, key: "events" as const,
-      desc: "Mega-event architecture, AV integration and rapid mobilization." },
-    { icon: Building2, key: "commercial" as const,
-      desc: "Corporate HQs, smart-building integration and workplace design." },
-    { icon: Zap, key: "energy" as const,
-      desc: "OT/IT convergence and critical infrastructure protection." },
-    { icon: Banknote, key: "finance" as const,
-      desc: "SOC build-outs, zero-trust networks and regulatory compliance." },
+    { icon: Landmark, key: "government" as const },
+    { icon: ShoppingBag, key: "retail" as const },
+    { icon: Sparkles, key: "events" as const },
+    { icon: Building2, key: "commercial" as const },
+    { icon: Zap, key: "energy" as const },
+    { icon: Banknote, key: "finance" as const },
   ];
 
   return (
     <>
       <Section className="!pt-32 !pb-12">
         <Reveal>
-          <Eyebrow>SECTORS</Eyebrow>
+          <Eyebrow>{t("eyebrow")}</Eyebrow>
           <H1 className="mt-6 max-w-4xl">{t("title")}</H1>
           <Lead className="mt-6">{t("intro")}</Lead>
         </Reveal>
@@ -60,7 +54,7 @@ export default async function IndustriesPage({
                   <H3 className="mt-6">{t(it.key)}</H3>
                   <p className="mt-3 text-sm leading-relaxed"
                      style={{ color: "var(--color-text-dim)" }}>
-                    {it.desc}
+                    {t(`${it.key}Desc`)}
                   </p>
                 </div>
               </StaggerItem>

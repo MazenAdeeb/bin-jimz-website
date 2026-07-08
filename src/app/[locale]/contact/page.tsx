@@ -17,7 +17,7 @@ export default async function ContactPage({
     <>
       <Section className="!pt-32 !pb-12">
         <Reveal>
-          <Eyebrow>CONTACT</Eyebrow>
+          <Eyebrow>{t("eyebrow")}</Eyebrow>
           <H1 className="mt-6 max-w-3xl">{t("title")}</H1>
           <Lead className="mt-6">{t("intro")}</Lead>
         </Reveal>

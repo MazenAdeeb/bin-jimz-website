@@ -93,7 +93,7 @@ export async function Footer() {
 
         <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-white/5 pt-6 text-xs md:flex-row md:items-center"
              style={{ color: "var(--color-text-mute)" }}>
-          <span>© {year} Bin Jimz. {t("footer.rights")}</span>
+          <span>© {year} {t("brand.name")}. {t("footer.rights")}</span>
           <div className="flex items-center gap-6">
             <Link href="/privacy" className="hover:text-[var(--color-gold)]">{t("footer.privacy")}</Link>
             <Link href="/terms" className="hover:text-[var(--color-gold)]">{t("footer.terms")}</Link>

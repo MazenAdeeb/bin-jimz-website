@@ -8,12 +8,15 @@ export default async function TermsPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const lang = locale === "ar" ? "ar" : "en";
   return (
     <Section className="!pt-32 prose prose-invert max-w-3xl">
-      <Eyebrow>LEGAL</Eyebrow>
-      <H1 className="mt-6">Terms of Use</H1>
+      <Eyebrow>{lang === "ar" ? "قانوني" : "LEGAL"}</Eyebrow>
+      <H1 className="mt-6">{lang === "ar" ? "شروط الاستخدام" : "Terms of Use"}</H1>
       <p className="mt-6" style={{ color: "var(--color-text-dim)" }}>
-        These are placeholder terms — replace with your final legal copy.
+        {lang === "ar"
+          ? "هذه شروط تمهيدية — استبدلها بنص الشروط القانونية النهائي الخاص بك."
+          : "These are placeholder terms — replace with your final legal copy."}
       </p>
     </Section>
   );

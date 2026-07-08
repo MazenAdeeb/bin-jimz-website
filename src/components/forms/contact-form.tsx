@@ -9,6 +9,7 @@ type Status = "idle" | "submitting" | "success" | "error";
 
 export function ContactForm() {
   const t = useTranslations("contact");
+  const tServices = useTranslations("services");
   const locale = useLocale();
   const [status, setStatus] = useState<Status>("idle");
 
@@ -50,10 +51,10 @@ export function ContactForm() {
         name="service"
         label={t("service")}
         options={[
-          { value: "engineering", label: "Engineering & Architectural Consulting" },
-          { value: "supplies", label: "General Supplies & Sourcing" },
-          { value: "contracting", label: "Premium Contracting & Execution" },
-          { value: "cybersecurity", label: "Advanced Cybersecurity Solutions" },
+          { value: "engineering", label: tServices("engineering.title") },
+          { value: "supplies", label: tServices("supplies.title") },
+          { value: "contracting", label: tServices("contracting.title") },
+          { value: "cybersecurity", label: tServices("cybersecurity.title") },
         ]}
       />
       <Textarea name="message" label={t("message")} required rows={5} />

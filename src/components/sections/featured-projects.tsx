@@ -34,7 +34,10 @@ export function FeaturedProjects({ eyebrow, title, viewAllLabel, projects }: Pro
         </Reveal>
         <Reveal>
           <Link href="/projects">
-            <Button variant="link">{viewAllLabel}  →</Button>
+            <Button variant="link">
+              {viewAllLabel}{" "}
+              <span className="inline-block rtl:-scale-x-100">→</span>
+            </Button>
           </Link>
         </Reveal>
       </div>

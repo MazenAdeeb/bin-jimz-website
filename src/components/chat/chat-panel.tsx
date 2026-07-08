@@ -176,7 +176,7 @@ export function ChatPanel({
           <button
             onClick={() => setVoiceOn((v) => !v)}
             className="rounded-full p-2 transition-colors hover:bg-white/5"
-            aria-label="Toggle voice replies"
+            aria-label={t("toggleVoice")}
             style={{ color: voiceOn ? "var(--color-cyber)" : "var(--color-text-mute)" }}
           >
             {voiceOn ? <Volume2 size={16} /> : <VolumeX size={16} />}

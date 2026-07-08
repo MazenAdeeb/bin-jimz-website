@@ -1,12 +1,13 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Section } from "@/components/ui/section";
 import { cn } from "@/lib/utils";
+import { serviceLabel, sectorLabel, type Lang } from "@/lib/labels";
 import {
   allProjects,
   type EngineeringCategory,
@@ -28,6 +29,7 @@ const DESIGNS: DesignType[] = ["interior", "exterior"];
 
 export function ProjectsGrid() {
   const t = useTranslations("projects");
+  const lang = (useLocale() === "ar" ? "ar" : "en") as Lang;
   const [service, setService] = useState<string>("all");
   const [category, setCategory] = useState<string>("all");
   const [design, setDesign] = useState<string>("all");
@@ -71,7 +73,7 @@ export function ProjectsGrid() {
         {services.map((s) => (
           <FilterPill
             key={s}
-            label={s}
+            label={serviceLabel(s, lang)}
             active={service === s}
             onClick={() => selectService(s)}
           />
@@ -182,10 +184,10 @@ export function ProjectsGrid() {
                           className="font-display text-[10px] tracking-[0.32em] uppercase"
                           style={{ color: "var(--color-gold)" }}
                         >
-                          {p.sector} · {p.service}
+                          {sectorLabel(p.sector, lang)} · {serviceLabel(p.service, lang)}
                         </p>
                         <h3 className="font-display mt-2 text-lg md:text-xl">
-                          {p.title}
+                          {p.title[lang]}
                         </h3>
                       </div>
                       <ArrowUpRight

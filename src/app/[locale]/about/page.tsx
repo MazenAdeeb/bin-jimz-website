@@ -1,7 +1,7 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Section, Eyebrow, H1, H2, H3, Lead } from "@/components/ui/section";
 import { Reveal, StaggerChildren, StaggerItem } from "@/components/motion/reveal";
-import { Target, Compass, Users, ArrowRight } from "lucide-react";
+import { Target, Compass, Users } from "lucide-react";
 
 export default async function AboutPage({
   params,
@@ -19,10 +19,10 @@ export default async function AboutPage({
   ];
 
   const advantages = [
-    { n: "01", t: "Efficiency", d: t("advEfficiency") },
-    { n: "02", t: "Quality", d: t("advQuality") },
-    { n: "03", t: "Customer-first", d: t("advCustomer") },
-    { n: "04", t: "Innovation", d: t("advInnovation") },
+    { n: "01", t: t("advEfficiencyTitle"), d: t("advEfficiency") },
+    { n: "02", t: t("advQualityTitle"), d: t("advQuality") },
+    { n: "03", t: t("advCustomerTitle"), d: t("advCustomer") },
+    { n: "04", t: t("advInnovationTitle"), d: t("advInnovation") },
   ];
 
   return (
@@ -39,7 +39,7 @@ export default async function AboutPage({
         <div className="grid gap-16 md:grid-cols-2">
           <Reveal>
             <Eyebrow>{t("visionTitle")}</Eyebrow>
-            <H2 className="mt-5">Vision</H2>
+            <H2 className="mt-5">{t("visionTitle")}</H2>
             <p className="mt-6 text-base leading-relaxed md:text-lg"
                style={{ color: "var(--color-text-dim)" }}>
               {t("vision")}
@@ -47,7 +47,7 @@ export default async function AboutPage({
           </Reveal>
           <Reveal delay={0.15}>
             <Eyebrow>{t("missionTitle")}</Eyebrow>
-            <H2 className="mt-5">Mission</H2>
+            <H2 className="mt-5">{t("missionTitle")}</H2>
             <p className="mt-6 text-base leading-relaxed md:text-lg"
                style={{ color: "var(--color-text-dim)" }}>
               {t("mission")}
@@ -96,7 +96,7 @@ export default async function AboutPage({
       <Section className="border-t border-white/5">
         <Reveal>
           <Eyebrow>{t("advantageTitle")}</Eyebrow>
-          <H2 className="mt-5">Why Bin Jimz</H2>
+          <H2 className="mt-5">{t("whyTitle")}</H2>
         </Reveal>
 
         <StaggerChildren className="mt-14 grid gap-x-12 gap-y-10 md:grid-cols-2">

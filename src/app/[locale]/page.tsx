@@ -8,6 +8,7 @@ import { FeaturedProjects, type FeaturedProject } from "@/components/sections/fe
 import { Essence } from "@/components/sections/essence";
 import { Cta } from "@/components/sections/cta";
 import { getSiteContent } from "@/lib/site-content";
+import { serviceLabel, sectorLabel } from "@/lib/labels";
 import { prisma } from "@/lib/db";
 
 export const dynamic = "force-dynamic";
@@ -50,12 +51,12 @@ async function loadFeatured(locale: "en" | "ar"): Promise<FeaturedProject[]> {
       const t = r.translations.find((x) => x.locale === locale) ??
         r.translations.find((x) => x.locale === "en");
       const service = r.services[0]?.pillar ?? "";
+      const serviceKey = service.charAt(0).toUpperCase() + service.slice(1);
       return {
         slug: r.slug,
         title: t?.title ?? r.slug,
-        sector: r.sector ?? "",
-        service:
-          service.charAt(0).toUpperCase() + service.slice(1),
+        sector: r.sector ? sectorLabel(r.sector, locale) : "",
+        service: serviceLabel(serviceKey, locale),
         cover: r.coverImage?.url ?? FALLBACK_COVER,
       };
     });

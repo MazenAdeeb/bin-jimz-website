@@ -15,7 +15,7 @@ export default async function ChatPage({
   return (
     <Section className="!pt-32">
       <Reveal>
-        <Eyebrow>JIMZ · AI ASSISTANT</Eyebrow>
+        <Eyebrow>{t("eyebrow")}</Eyebrow>
         <H1 className="mt-6 max-w-3xl">{t("title")}</H1>
         <Lead className="mt-6">{t("subtitle")}</Lead>
       </Reveal>

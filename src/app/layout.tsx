@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getLocale } from "next-intl/server";
 import { Cinzel, Montserrat, Cairo, Reem_Kufi } from "next/font/google";
 import "./globals.css";
 
@@ -46,14 +47,17 @@ export const metadata: Metadata = {
   icons: { icon: "/favicon.png" },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const locale = await getLocale();
+  const dir = locale === "ar" ? "rtl" : "ltr";
   return (
     <html
-      lang="en"
+      lang={locale}
+      dir={dir}
       suppressHydrationWarning
       className={`${cinzel.variable} ${montserrat.variable} ${cairo.variable} ${reemKufi.variable}`}
     >

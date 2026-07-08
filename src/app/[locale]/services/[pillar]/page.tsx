@@ -9,59 +9,103 @@ import { getSiteContent } from "@/lib/site-content";
 
 type Pillar = "engineering" | "supplies" | "contracting" | "cybersecurity";
 
+type Bilingual = { en: string; ar: string };
+
 const meta: Record<
   Pillar,
-  { icon: ComponentType<{ size?: number }>; capabilities: string[]; process: string[] }
+  { icon: ComponentType<{ size?: number }>; capabilities: Bilingual[]; process: Bilingual[] }
 > = {
   engineering: {
     icon: Building2,
     capabilities: [
-      "Architectural concept & schematic design",
-      "Interior & exterior design",
-      "Spatial planning and feasibility",
-      "MEP coordination",
-      "Permitting & regulatory liaison",
-      "BIM modeling & documentation",
+      { en: "Architectural concept & schematic design", ar: "التصميم المعماري المبدئي والتخطيطي" },
+      { en: "Interior & exterior design", ar: "التصميم الداخلي والخارجي" },
+      { en: "Spatial planning and feasibility", ar: "التخطيط المكاني ودراسات الجدوى" },
+      { en: "MEP coordination", ar: "تنسيق الأعمال الكهروميكانيكية" },
+      { en: "Permitting & regulatory liaison", ar: "التصاريح والتنسيق التنظيمي" },
+      { en: "BIM modeling & documentation", ar: "نمذجة معلومات البناء والتوثيق" },
     ],
-    process: ["Discover", "Define", "Design", "Document", "Deliver"],
+    process: [
+      { en: "Discover", ar: "الاستكشاف" },
+      { en: "Define", ar: "التحديد" },
+      { en: "Design", ar: "التصميم" },
+      { en: "Document", ar: "التوثيق" },
+      { en: "Deliver", ar: "التسليم" },
+    ],
   },
   supplies: {
     icon: Package,
     capabilities: [
-      "Premium construction materials",
-      "Architectural finishes & cladding",
-      "Specialized equipment sourcing",
-      "Logistics & customs handling",
-      "Vendor qualification",
-      "Just-in-time delivery",
+      { en: "Premium construction materials", ar: "مواد بناء متميزة" },
+      { en: "Architectural finishes & cladding", ar: "التشطيبات المعمارية والكسوات" },
+      { en: "Specialized equipment sourcing", ar: "توريد المعدات المتخصصة" },
+      { en: "Logistics & customs handling", ar: "الخدمات اللوجستية والتخليص الجمركي" },
+      { en: "Vendor qualification", ar: "تأهيل الموردين" },
+      { en: "Just-in-time delivery", ar: "التسليم في الوقت المحدد" },
     ],
-    process: ["Specify", "Source", "Qualify", "Ship", "Track"],
+    process: [
+      { en: "Specify", ar: "التحديد" },
+      { en: "Source", ar: "التوريد" },
+      { en: "Qualify", ar: "التأهيل" },
+      { en: "Ship", ar: "الشحن" },
+      { en: "Track", ar: "التتبع" },
+    ],
   },
   contracting: {
     icon: HardHat,
     capabilities: [
-      "General contracting",
-      "Turnkey fit-outs",
-      "Mega-event pavilions",
-      "Project management",
-      "QA/QC and HSE compliance",
-      "Accelerated delivery programs",
+      { en: "General contracting", ar: "المقاولات العامة" },
+      { en: "Turnkey fit-outs", ar: "التشطيبات المتكاملة تسليم مفتاح" },
+      { en: "Mega-event pavilions", ar: "أجنحة الفعاليات الكبرى" },
+      { en: "Project management", ar: "إدارة المشاريع" },
+      { en: "QA/QC and HSE compliance", ar: "ضمان الجودة والامتثال للصحة والسلامة والبيئة" },
+      { en: "Accelerated delivery programs", ar: "برامج التسليم المعجّل" },
     ],
-    process: ["Plan", "Mobilize", "Build", "Commission", "Handover"],
+    process: [
+      { en: "Plan", ar: "التخطيط" },
+      { en: "Mobilize", ar: "التعبئة" },
+      { en: "Build", ar: "التنفيذ" },
+      { en: "Commission", ar: "التشغيل التجريبي" },
+      { en: "Handover", ar: "التسليم" },
+    ],
   },
   cybersecurity: {
     icon: Shield,
     capabilities: [
-      "Security assessments & pen-testing",
-      "SOC & 24/7 monitoring",
-      "Identity & access management",
-      "Cloud security architecture",
-      "Incident response & forensics",
-      "Compliance (ISO 27001, NIST)",
+      { en: "Security assessments & pen-testing", ar: "تقييمات الأمن واختبار الاختراق" },
+      { en: "SOC & 24/7 monitoring", ar: "مركز العمليات الأمنية والمراقبة على مدار الساعة" },
+      { en: "Identity & access management", ar: "إدارة الهوية والوصول" },
+      { en: "Cloud security architecture", ar: "هندسة أمن السحابة" },
+      { en: "Incident response & forensics", ar: "الاستجابة للحوادث والأدلة الجنائية الرقمية" },
+      { en: "Compliance (ISO 27001, NIST)", ar: "الامتثال (ISO 27001، NIST)" },
     ],
-    process: ["Assess", "Design", "Deploy", "Monitor", "Improve"],
+    process: [
+      { en: "Assess", ar: "التقييم" },
+      { en: "Design", ar: "التصميم" },
+      { en: "Deploy", ar: "النشر" },
+      { en: "Monitor", ar: "المراقبة" },
+      { en: "Improve", ar: "التحسين" },
+    ],
   },
 };
+
+const pillarLabelAr: Record<Pillar, string> = {
+  engineering: "الهندسة",
+  supplies: "التوريدات",
+  contracting: "المقاولات",
+  cybersecurity: "الأمن السيبراني",
+};
+
+const ui = {
+  capabilities: { en: "Capabilities", ar: "الإمكانات" },
+  whatWeDeliver: { en: "What we deliver", ar: "ما نقدّمه" },
+  ourProcess: { en: "Our process", ar: "منهجيتنا" },
+  processTitle: {
+    en: "A disciplined path from idea to outcome",
+    ar: "مسار منضبط من الفكرة إلى النتيجة",
+  },
+  step: { en: "Step", ar: "خطوة" },
+} as const;
 
 export function generateStaticParams() {
   return (Object.keys(meta) as Pillar[]).flatMap((pillar) =>
@@ -109,7 +153,7 @@ export default async function ServiceDetailPage({
               >
                 <Icon size={22} />
               </div>
-              <Eyebrow>{key.toUpperCase()}</Eyebrow>
+              <Eyebrow>{lang === "ar" ? pillarLabelAr[key] : key.toUpperCase()}</Eyebrow>
             </div>
             <H1 className="mt-8 max-w-4xl">{t("title")}</H1>
             <p
@@ -126,16 +170,16 @@ export default async function ServiceDetailPage({
       <Section className="border-t border-white/5">
         <div className="grid gap-12 md:grid-cols-12">
           <Reveal className="md:col-span-4">
-            <Eyebrow>Capabilities</Eyebrow>
-            <H2 className="mt-4">What we deliver</H2>
+            <Eyebrow>{ui.capabilities[lang]}</Eyebrow>
+            <H2 className="mt-4">{ui.whatWeDeliver[lang]}</H2>
           </Reveal>
           <StaggerChildren className="md:col-span-8 grid gap-3 sm:grid-cols-2">
             {meta[key].capabilities.map((c) => (
-              <StaggerItem key={c}>
+              <StaggerItem key={c.en}>
                 <div className="flex items-start gap-3 rounded-md border p-4"
                      style={{ borderColor: "rgba(200,169,106,0.18)" }}>
                   <Check size={16} style={{ color: "var(--color-gold)" }} />
-                  <span className="text-sm" style={{ color: "var(--color-text-dim)" }}>{c}</span>
+                  <span className="text-sm" style={{ color: "var(--color-text-dim)" }}>{c[lang]}</span>
                 </div>
               </StaggerItem>
             ))}
@@ -145,19 +189,19 @@ export default async function ServiceDetailPage({
 
       <Section className="border-t border-white/5">
         <Reveal>
-          <Eyebrow>Our process</Eyebrow>
-          <H2 className="mt-4">A disciplined path from idea to outcome</H2>
+          <Eyebrow>{ui.ourProcess[lang]}</Eyebrow>
+          <H2 className="mt-4">{ui.processTitle[lang]}</H2>
         </Reveal>
         <div className="mt-12 grid grid-cols-2 gap-6 md:grid-cols-5">
           {meta[key].process.map((step, i) => (
-            <Reveal key={step} delay={i * 0.08}>
+            <Reveal key={step.en} delay={i * 0.08}>
               <div className="border-t pt-5"
                    style={{ borderColor: "rgba(200,169,106,0.4)" }}>
                 <span className="font-display text-xs tracking-[0.32em] uppercase"
                       style={{ color: "var(--color-gold)" }}>
-                  Step {String(i + 1).padStart(2, "0")}
+                  {ui.step[lang]} {String(i + 1).padStart(2, "0")}
                 </span>
-                <H3 className="mt-3">{step}</H3>
+                <H3 className="mt-3">{step[lang]}</H3>
               </div>
             </Reveal>
           ))}

@@ -19,7 +19,6 @@ async function createProject(fd: FormData) {
   const sector = String(fd.get("sector") ?? "").trim();
   const client = String(fd.get("client") ?? "").trim();
   const location = String(fd.get("location") ?? "").trim();
-  const year = parseInt(String(fd.get("year") ?? new Date().getFullYear()), 10);
   const featured = fd.get("featured") === "on";
   const status = (String(fd.get("status") ?? "draft") as ProjectStatus) || "draft";
   const coverImageId = (fd.get("coverImageId") as string) || null;
@@ -31,7 +30,7 @@ async function createProject(fd: FormData) {
   const project = await prisma.project.create({
     data: {
       slug,
-      year,
+      year: 0,
       sector: sector || null,
       client: client || null,
       location: location || null,

@@ -109,9 +109,21 @@
     "title": "المشاريع",
     "intro": "أعمال مختارة في الهندسة والمقاولات والأمن السيبراني.",
     "filterAll": "الكل",
-    "filterSector": "القطاع",
-    "filterYear": "السنة",
     "filterService": "الخدمة",
+    "typeLabel": "نوع المبنى",
+    "designLabel": "تصميم داخلي / خارجي",
+    "categories": {
+      "residential": "سكني",
+      "commercial": "تجاري",
+      "hospitality": "ضيافة",
+      "healthcare": "رعاية صحية",
+      "education": "تعليمي",
+      "industrial": "صناعي"
+    },
+    "design": {
+      "interior": "تصميم داخلي",
+      "exterior": "تصميم خارجي"
+    },
     "empty": "لا توجد مشاريع مطابقة بعد."
   },
   "contact": {

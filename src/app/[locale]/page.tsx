@@ -43,7 +43,7 @@ async function loadFeatured(locale: "en" | "ar"): Promise<FeaturedProject[]> {
     const rows = await prisma.project.findMany({
       where: { status: "published", featured: true },
       include: { translations: true, coverImage: true, services: true },
-      orderBy: [{ year: "desc" }, { createdAt: "desc" }],
+      orderBy: [{ createdAt: "desc" }],
       take: 4,
     });
     return rows.map((r) => {
@@ -54,7 +54,6 @@ async function loadFeatured(locale: "en" | "ar"): Promise<FeaturedProject[]> {
         slug: r.slug,
         title: t?.title ?? r.slug,
         sector: r.sector ?? "",
-        year: r.year,
         service:
           service.charAt(0).toUpperCase() + service.slice(1),
         cover: r.coverImage?.url ?? FALLBACK_COVER,

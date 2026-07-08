@@ -16,13 +16,13 @@ export function BrandMark({
 }: Props) {
   if (!monogramOnly && showWordmark) {
     // Full lockup (shield + "Bin Jimz" wordmark), cropped from the official
-    // company profile — the source crop is 1200x1047 (~1.146:1).
+    // brand artwork — the source crop is 900x811 (~1.110:1).
     const height = Math.round(size * 2.6);
     return (
       <Image
         src="/brand/bin-jimz-logo.png"
         alt="Bin Jimz"
-        width={Math.round(height * 1.146)}
+        width={Math.round(height * 1.11)}
         height={height}
         className={cn("h-auto w-auto object-contain", className)}
         style={{ height, width: "auto" }}

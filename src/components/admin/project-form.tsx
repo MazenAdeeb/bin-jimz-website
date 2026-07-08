@@ -19,7 +19,6 @@ type ProjectFormValues = {
   sector?: string;
   client?: string;
   location?: string;
-  year?: number;
   status?: "draft" | "published" | "archived";
   featured?: boolean;
   coverImageId?: string | null;
@@ -43,12 +42,6 @@ export function ProjectForm({
         <Field name="sector" label="Sector" defaultValue={defaults?.sector} />
         <Field name="client" label="Client (optional)" defaultValue={defaults?.client} />
         <Field name="location" label="Location" defaultValue={defaults?.location} />
-        <Field
-          name="year"
-          label="Year"
-          type="number"
-          defaultValue={String(defaults?.year ?? new Date().getFullYear())}
-        />
       </div>
 
       <Textarea

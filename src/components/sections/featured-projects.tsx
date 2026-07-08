@@ -11,7 +11,6 @@ export type FeaturedProject = {
   slug: string;
   title: string;
   sector: string;
-  year: number;
   service: string;
   cover: string;
 };
@@ -67,7 +66,7 @@ export function FeaturedProjects({ eyebrow, title, viewAllLabel, projects }: Pro
                       className="font-display text-[10px] tracking-[0.32em] uppercase"
                       style={{ color: "var(--color-gold)" }}
                     >
-                      {p.sector} · {p.service} · {p.year}
+                      {p.sector} · {p.service}
                     </p>
                     <h3 className="font-display mt-2 text-xl md:text-2xl">{p.title}</h3>
                   </div>

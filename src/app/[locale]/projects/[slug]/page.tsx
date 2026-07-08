@@ -31,7 +31,7 @@ export default async function ProjectDetailPage({
       <Section className="!pt-32 !pb-12">
         <Reveal>
           <Eyebrow>
-            {project.sector} · {project.service} · {project.year}
+            {project.sector} · {project.service}
           </Eyebrow>
           <H1 className="mt-6 max-w-4xl">{project.title}</H1>
           {project.location && (

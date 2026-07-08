@@ -7,46 +7,135 @@ import { ArrowUpRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Section } from "@/components/ui/section";
 import { cn } from "@/lib/utils";
-import { allProjects } from "@/data/projects";
+import {
+  allProjects,
+  type EngineeringCategory,
+  type DesignType,
+} from "@/data/projects";
+
+const ENGINEERING = "Engineering";
+
+const CATEGORIES: EngineeringCategory[] = [
+  "residential",
+  "commercial",
+  "hospitality",
+  "healthcare",
+  "education",
+  "industrial",
+];
+
+const DESIGNS: DesignType[] = ["interior", "exterior"];
 
 export function ProjectsGrid() {
   const t = useTranslations("projects");
   const [service, setService] = useState<string>("all");
-  const [year, setYear] = useState<string>("all");
+  const [category, setCategory] = useState<string>("all");
+  const [design, setDesign] = useState<string>("all");
 
   const services = useMemo(
-    () => Array.from(new Set(allProjects.map((p) => p.service))),
-    [],
-  );
-  const years = useMemo(
-    () =>
-      Array.from(new Set(allProjects.map((p) => p.year))).sort((a, b) => b - a),
+    () => Array.from(new Set(allProjects.map((p) => p.service))).sort(),
     [],
   );
 
   const filtered = useMemo(
     () =>
-      allProjects.filter(
-        (p) =>
-          (service === "all" || p.service === service) &&
-          (year === "all" || String(p.year) === year),
-      ),
-    [service, year],
+      allProjects.filter((p) => {
+        if (service !== "all" && p.service !== service) return false;
+        if (service === ENGINEERING) {
+          if (category !== "all" && p.category !== category) return false;
+          if (design !== "all" && p.design !== design) return false;
+        }
+        return true;
+      }),
+    [service, category, design],
   );
+
+  const selectService = (s: string) => {
+    setService(s);
+    if (s !== ENGINEERING) {
+      setCategory("all");
+      setDesign("all");
+    }
+  };
+
+  const engineeringActive = service === ENGINEERING;
 
   return (
     <Section className="!pt-0">
-      <div className="mb-10 flex flex-wrap items-center gap-3">
-        <FilterPill label={t("filterAll")} active={service === "all"} onClick={() => setService("all")} />
+      <div className="mb-6 flex flex-wrap items-center gap-3">
+        <FilterPill
+          label={t("filterAll")}
+          active={service === "all"}
+          onClick={() => selectService("all")}
+        />
         {services.map((s) => (
-          <FilterPill key={s} label={s} active={service === s} onClick={() => setService(s)} />
-        ))}
-        <span className="mx-2 hidden h-4 w-px bg-white/10 md:block" />
-        <FilterPill label="Any year" active={year === "all"} onClick={() => setYear("all")} />
-        {years.map((y) => (
-          <FilterPill key={y} label={String(y)} active={year === String(y)} onClick={() => setYear(String(y))} />
+          <FilterPill
+            key={s}
+            label={s}
+            active={service === s}
+            onClick={() => selectService(s)}
+          />
         ))}
       </div>
+
+      <AnimatePresence initial={false}>
+        {engineeringActive && (
+          <motion.div
+            key="eng-subfilters"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="overflow-hidden"
+          >
+            <div
+              className="mb-10 space-y-4 rounded-md border-s-2 py-4 ps-5"
+              style={{
+                borderColor: "var(--color-gold)",
+                background: "rgba(200,169,106,0.03)",
+              }}
+            >
+              <div>
+                <SubLabel>{t("typeLabel")}</SubLabel>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  <SubPill
+                    label={t("filterAll")}
+                    active={category === "all"}
+                    onClick={() => setCategory("all")}
+                  />
+                  {CATEGORIES.map((c) => (
+                    <SubPill
+                      key={c}
+                      label={t(`categories.${c}`)}
+                      active={category === c}
+                      onClick={() => setCategory(c)}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <SubLabel>{t("designLabel")}</SubLabel>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  <SubPill
+                    label={t("filterAll")}
+                    active={design === "all"}
+                    onClick={() => setDesign("all")}
+                  />
+                  {DESIGNS.map((d) => (
+                    <SubPill
+                      key={d}
+                      label={t(`design.${d}`)}
+                      active={design === d}
+                      onClick={() => setDesign(d)}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <AnimatePresence mode="popLayout">
         {filtered.length === 0 ? (
@@ -93,7 +182,7 @@ export function ProjectsGrid() {
                           className="font-display text-[10px] tracking-[0.32em] uppercase"
                           style={{ color: "var(--color-gold)" }}
                         >
-                          {p.sector} · {p.service} · {p.year}
+                          {p.sector} · {p.service}
                         </p>
                         <h3 className="font-display mt-2 text-lg md:text-xl">
                           {p.title}
@@ -116,6 +205,17 @@ export function ProjectsGrid() {
   );
 }
 
+function SubLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <span
+      className="font-display text-[10px] tracking-[0.28em] uppercase"
+      style={{ color: "var(--color-gold-soft)" }}
+    >
+      {children}
+    </span>
+  );
+}
+
 function FilterPill({
   label,
   active,
@@ -132,6 +232,30 @@ function FilterPill({
         "font-display rounded-full border px-4 py-2 text-[10px] tracking-[0.22em] uppercase transition-all",
         active
           ? "border-[var(--color-gold)] bg-[var(--color-gold)] text-[var(--color-base)]"
+          : "border-white/10 text-[var(--color-text-dim)] hover:border-[var(--color-gold)]/50 hover:text-[var(--color-text)]",
+      )}
+    >
+      {label}
+    </button>
+  );
+}
+
+function SubPill({
+  label,
+  active,
+  onClick,
+}: {
+  label: string;
+  active: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className={cn(
+        "rounded-full border px-3.5 py-1.5 text-[10px] tracking-[0.14em] transition-all",
+        active
+          ? "border-[var(--color-gold)] bg-[var(--color-gold)]/15 text-[var(--color-gold)]"
           : "border-white/10 text-[var(--color-text-dim)] hover:border-[var(--color-gold)]/50 hover:text-[var(--color-text)]",
       )}
     >

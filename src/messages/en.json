@@ -109,9 +109,21 @@
     "title": "Projects",
     "intro": "Selected work across engineering, contracting and cybersecurity.",
     "filterAll": "All",
-    "filterSector": "Sector",
-    "filterYear": "Year",
     "filterService": "Service",
+    "typeLabel": "Building type",
+    "designLabel": "Interior / Exterior",
+    "categories": {
+      "residential": "Residential",
+      "commercial": "Commercial",
+      "hospitality": "Hospitality",
+      "healthcare": "Healthcare",
+      "education": "Education",
+      "industrial": "Industrial"
+    },
+    "design": {
+      "interior": "Interior",
+      "exterior": "Exterior"
+    },
     "empty": "No projects match your filters yet."
   },
   "contact": {

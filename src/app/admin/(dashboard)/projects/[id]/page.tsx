@@ -35,7 +35,6 @@ export default async function EditProjectPage({
     const sector = String(fd.get("sector") ?? "").trim();
     const client = String(fd.get("client") ?? "").trim();
     const location = String(fd.get("location") ?? "").trim();
-    const year = parseInt(String(fd.get("year") ?? new Date().getFullYear()), 10);
     const featured = fd.get("featured") === "on";
     const status = (String(fd.get("status") ?? "draft") as ProjectStatus) || "draft";
     const coverImageId = (fd.get("coverImageId") as string) || null;
@@ -44,7 +43,6 @@ export default async function EditProjectPage({
     await prisma.project.update({
       where: { id },
       data: {
-        year,
         sector: sector || null,
         client: client || null,
         location: location || null,
@@ -120,7 +118,6 @@ export default async function EditProjectPage({
           sector: project.sector ?? "",
           client: project.client ?? "",
           location: project.location ?? "",
-          year: project.year,
           status: project.status,
           featured: project.featured,
           coverImageId: project.coverImageId,

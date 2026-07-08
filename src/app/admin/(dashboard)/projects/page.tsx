@@ -49,7 +49,6 @@ export default async function ProjectsAdminPage() {
             <tr>
               <th className="px-4 py-3">Title</th>
               <th className="px-4 py-3">Sector</th>
-              <th className="px-4 py-3">Year</th>
               <th className="px-4 py-3">Status</th>
               <th className="px-4 py-3">Featured</th>
             </tr>
@@ -58,7 +57,7 @@ export default async function ProjectsAdminPage() {
             {rows.length === 0 ? (
               <tr>
                 <td
-                  colSpan={5}
+                  colSpan={4}
                   className="px-4 py-12 text-center text-sm"
                   style={{ color: "var(--color-text-mute)" }}
                 >
@@ -80,9 +79,6 @@ export default async function ProjectsAdminPage() {
                     </td>
                     <td className="px-4 py-3" style={{ color: "var(--color-text-dim)" }}>
                       {p.sector ?? "—"}
-                    </td>
-                    <td className="px-4 py-3" style={{ color: "var(--color-text-dim)" }}>
-                      {p.year}
                     </td>
                     <td className="px-4 py-3">
                       <span

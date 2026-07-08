@@ -43,7 +43,7 @@ function fallbackReply(locale: "en" | "ar", question: string) {
     lower.includes("أعمال") ||
     lower.includes("مشاريع")
   ) {
-    const sample = allProjects.slice(0, 3).map((p) => `• ${p.title} (${p.year})`).join("\n");
+    const sample = allProjects.slice(0, 3).map((p) => `• ${p.title} (${p.service})`).join("\n");
     return useAr
       ? `لدينا أكثر من 300 مشروع منجز. أمثلة:\n${sample}`
       : `We've delivered 300+ projects. A few examples:\n${sample}`;
@@ -113,7 +113,7 @@ export async function POST(req: NextRequest) {
     {
       role: "system" as const,
       content: `Reference knowledge:\n${BIN_JIMZ_KNOWLEDGE}\n\nProject samples (titles only):\n${allProjects
-        .map((p) => `- ${p.title} (${p.sector}/${p.service}/${p.year})`)
+        .map((p) => `- ${p.title} (${p.sector}/${p.service})`)
         .join("\n")}`,
     },
     ...messages.map((m) => ({ role: m.role, content: m.content })),

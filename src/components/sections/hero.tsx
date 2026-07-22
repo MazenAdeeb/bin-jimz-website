@@ -59,6 +59,9 @@ export function Hero({
             src="/brand/bin-jimz-mark.png"
             alt=""
             fill
+            // Only rendered from lg up; ask for a variant matching the 60% box
+            // so the shield stays crisp on high-DPI screens.
+            sizes="(min-width: 1024px) 60vw, 1px"
             className="object-contain"
             priority
           />

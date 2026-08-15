@@ -107,6 +107,12 @@
     font-family: var(--font-arabic-display);
   }
 
+  /* Arabic script is cursive — letter-spacing (tracking) loosens the joins and
+     makes headings/overlines look broken. Neutralise it across the RTL tree. */
+  html[dir="rtl"] * {
+    letter-spacing: 0 !important;
+  }
+
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;

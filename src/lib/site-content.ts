@@ -16,6 +16,12 @@ export type SiteContent = {
     title: { en: string; ar: string };
     desc: { en: string; ar: string };
   }>;
+  ecommerce: {
+    eyebrow: { en: string; ar: string };
+    title: { en: string; ar: string };
+    desc: { en: string; ar: string };
+    cta: { en: string; ar: string };
+  };
   services: {
     eyebrow: { en: string; ar: string };
     title: { en: string; ar: string };
@@ -46,7 +52,7 @@ export type SiteContent = {
   };
   contact: {
     email: string;
-    phone: string;
+    phones: string[];
     whatsapp: string;
     address: { en: string; ar: string };
   };
@@ -103,6 +109,18 @@ export const defaultContent: SiteContent = {
       },
     },
   ],
+  ecommerce: {
+    eyebrow: { en: "NEW · E-COMMERCE", ar: "جديد · التجارة الإلكترونية" },
+    title: {
+      en: "E-commerce solutions that sell.",
+      ar: "حلول تجارة إلكترونية تبيع فعلاً.",
+    },
+    desc: {
+      en: "We design, build and secure high-converting online stores — storefront, payments, and logistics engineered end-to-end.",
+      ar: "نصمّم ونبني ونؤمّن متاجر إلكترونية عالية التحويل — الواجهة والمدفوعات والخدمات اللوجستية بتنفيذٍ متكامل.",
+    },
+    cta: { en: "Start selling online", ar: "ابدأ البيع أونلاين" },
+  },
   services: {
     eyebrow: { en: "WHAT WE DO", ar: "ما نقوم به" },
     title: { en: "Four pillars. One partner.", ar: "أربع ركائز. شريك واحد." },
@@ -170,12 +188,12 @@ export const defaultContent: SiteContent = {
     button: { en: "Start a conversation", ar: "ابدأ محادثة" },
   },
   contact: {
-    email: "m.mostafa@binjimz.com",
-    phone: "+20 10 10429021",
-    whatsapp: "01113660749",
+    email: "Info@binjimz.com",
+    phones: ["+20 10 0021 5557", "+971 54 200 0526"],
+    whatsapp: "+201000215557",
     address: {
-      en: "Nasr City St., Cairo, Egypt",
-      ar: "مدينة نصر، القاهرة، مصر",
+      en: "Sheikh Zayed, Riviera St., Bldg 49, 1st Floor, Apt 5, Egypt",
+      ar: "الشيخ زايد، شارع ريڤيرا، عمارة ٤٩، الدور الأول، شقة ٥",
     },
   },
 };
@@ -207,6 +225,7 @@ function mergeContent(a: SiteContent, b: Partial<SiteContent>): SiteContent {
     brand: { ...a.brand, ...(b.brand ?? {}) },
     hero: { ...a.hero, ...(b.hero ?? {}) },
     stats: b.stats ?? a.stats,
+    ecommerce: { ...a.ecommerce, ...(b.ecommerce ?? {}) },
     services: { ...a.services, ...(b.services ?? {}) },
     projects: { ...a.projects, ...(b.projects ?? {}) },
     process: {

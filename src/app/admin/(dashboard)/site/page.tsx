@@ -30,6 +30,12 @@ async function update(fd: FormData) {
       title: { en: get(`stats.${i}.title.en`), ar: get(`stats.${i}.title.ar`) },
       desc: { en: get(`stats.${i}.desc.en`), ar: get(`stats.${i}.desc.ar`) },
     })),
+    ecommerce: {
+      eyebrow: { en: get("ecommerce.eyebrow.en"), ar: get("ecommerce.eyebrow.ar") },
+      title: { en: get("ecommerce.title.en"), ar: get("ecommerce.title.ar") },
+      desc: { en: get("ecommerce.desc.en"), ar: get("ecommerce.desc.ar") },
+      cta: { en: get("ecommerce.cta.en"), ar: get("ecommerce.cta.ar") },
+    },
     services: {
       eyebrow: { en: get("services.eyebrow.en"), ar: get("services.eyebrow.ar") },
       title: { en: get("services.title.en"), ar: get("services.title.ar") },
@@ -69,7 +75,9 @@ async function update(fd: FormData) {
     },
     contact: {
       email: get("contact.email"),
-      phone: get("contact.phone"),
+      phones: [get("contact.phones.0"), get("contact.phones.1")]
+        .map((s) => s.trim())
+        .filter(Boolean),
       whatsapp: get("contact.whatsapp"),
       address: { en: get("contact.address.en"), ar: get("contact.address.ar") },
     },
@@ -176,6 +184,13 @@ export default async function SiteContentPage({
           ))}
         </SectionGroup>
 
+        <SectionGroup title="E-commerce banner (below the hero)">
+          <Pair label="Eyebrow" en={c.ecommerce.eyebrow.en} ar={c.ecommerce.eyebrow.ar} prefix="ecommerce.eyebrow" />
+          <Pair label="Title" en={c.ecommerce.title.en} ar={c.ecommerce.title.ar} prefix="ecommerce.title" />
+          <Pair label="Description" en={c.ecommerce.desc.en} ar={c.ecommerce.desc.ar} prefix="ecommerce.desc" textarea />
+          <Pair label="Button label" en={c.ecommerce.cta.en} ar={c.ecommerce.cta.ar} prefix="ecommerce.cta" />
+        </SectionGroup>
+
         <SectionGroup title="Services section">
           <Pair label="Eyebrow" en={c.services.eyebrow.en} ar={c.services.eyebrow.ar} prefix="services.eyebrow" />
           <Pair label="Title" en={c.services.title.en} ar={c.services.title.ar} prefix="services.title" />
@@ -253,12 +268,13 @@ export default async function SiteContentPage({
         <SectionGroup title="Contact info (footer & contact page)">
           <Bilingual single>
             <Field name="contact.email" label="Email" defaultValue={c.contact.email} />
-            <Field name="contact.phone" label="Phone" defaultValue={c.contact.phone} />
             <Field
               name="contact.whatsapp"
-              label="WhatsApp number (local format, e.g. 01113660749)"
+              label="WhatsApp number (e.g. +201000215557)"
               defaultValue={c.contact.whatsapp}
             />
+            <Field name="contact.phones.0" label="Phone 1" defaultValue={c.contact.phones[0] ?? ""} />
+            <Field name="contact.phones.1" label="Phone 2 (optional)" defaultValue={c.contact.phones[1] ?? ""} />
           </Bilingual>
           <Pair
             label="Address"

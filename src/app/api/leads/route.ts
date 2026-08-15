@@ -59,7 +59,7 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const sales = process.env.SES_SALES_EMAIL ?? "m.mostafa@binjimz.com";
+    const sales = process.env.SES_SALES_EMAIL ?? "Info@binjimz.com";
     await sendEmail({
       to: sales,
       subject: `New ${body.source} lead — ${body.name}`,

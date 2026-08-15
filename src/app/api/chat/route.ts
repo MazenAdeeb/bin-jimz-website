@@ -55,8 +55,8 @@ function fallbackReply(locale: "en" | "ar", question: string) {
     lower.includes("تواصل")
   ) {
     return useAr
-      ? "للتواصل: m.mostafa@binjimz.com · +20 10 10429021 · القاهرة، شارع مدينة نصر."
-      : "Contact us: m.mostafa@binjimz.com · +20 10 10429021 · Nasr City, Cairo.";
+      ? "للتواصل: Info@binjimz.com · +20 10 0021 5557 · +971 54 200 0526 · الشيخ زايد، شارع ريڤيرا."
+      : "Contact us: Info@binjimz.com · +20 10 0021 5557 · +971 54 200 0526 · Sheikh Zayed, Egypt.";
   }
   return useAr
     ? "أنا جيمز، المساعد الذكي لشركة بن جيمز. تفضّل بسؤالك حول الهندسة أو المقاولات أو التوريدات أو الأمن السيبراني."

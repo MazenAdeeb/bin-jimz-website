@@ -1,4 +1,4 @@
-import { getTranslations } from "next-intl/server";
+import { getTranslations, getLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { BrandMark } from "@/components/ui/brand-mark";
 import { Mail, Phone, MapPin, MessageCircle } from "lucide-react";
@@ -11,8 +11,12 @@ function toWaNumber(raw: string) {
   return digits;
 }
 
+const telHref = (p: string) => `tel:${p.replace(/[^\d+]/g, "")}`;
+
 export async function Footer() {
   const t = await getTranslations();
+  const locale = await getLocale();
+  const lang = locale === "ar" ? "ar" : "en";
   const year = new Date().getFullYear();
   const content = await getSiteContent();
   const waHref = `https://wa.me/${toWaNumber(content.contact.whatsapp)}`;
@@ -71,12 +75,14 @@ export async function Footer() {
             <ul className="space-y-3 text-sm" style={{ color: "var(--color-text-dim)" }}>
               <li className="flex items-start gap-2">
                 <Mail size={14} className="mt-1 shrink-0" />
-                <a href="mailto:m.mostafa@binjimz.com">m.mostafa@binjimz.com</a>
+                <a href={`mailto:${content.contact.email}`}>{content.contact.email}</a>
               </li>
-              <li className="flex items-start gap-2">
-                <Phone size={14} className="mt-1 shrink-0" />
-                <a href="tel:+201010429021">+20 10 10429021</a>
-              </li>
+              {content.contact.phones.map((p) => (
+                <li key={p} className="flex items-start gap-2">
+                  <Phone size={14} className="mt-1 shrink-0" />
+                  <a href={telHref(p)} dir="ltr">{p}</a>
+                </li>
+              ))}
               <li className="flex items-start gap-2">
                 <MessageCircle size={14} className="mt-1 shrink-0" />
                 <a href={waHref} target="_blank" rel="noopener noreferrer">
@@ -85,7 +91,7 @@ export async function Footer() {
               </li>
               <li className="flex items-start gap-2">
                 <MapPin size={14} className="mt-1 shrink-0" />
-                {t("contact.address")}
+                {content.contact.address[lang]}
               </li>
             </ul>
           </div>

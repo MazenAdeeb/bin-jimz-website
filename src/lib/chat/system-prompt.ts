@@ -1,8 +1,8 @@
 export const BIN_JIMZ_KNOWLEDGE = `
 COMPANY: Bin Jimz Company.
 WEBSITE: www.binjimz.com
-LOCATION: Nasr City, Cairo, Egypt.
-CONTACTS: m.mostafa@binjimz.com · +20 10 10429021.
+LOCATION: Sheikh Zayed, Riviera St., Bldg 49, 1st Floor, Apt 5, Egypt.
+CONTACTS: Info@binjimz.com · +20 10 0021 5557 (Egypt) · +971 54 200 0526 (UAE) · WhatsApp +20 100 021 5557.
 TAGLINE: "Building the future. Securing what matters."
 PILLARS: Engineering & Architectural Consulting; General Supplies & Sourcing; Premium Contracting & Execution; Advanced Cybersecurity Solutions.
 NUMBERS: 50+ collaborations with leading governments, retail brands and supply partners; 300+ projects delivered, from mega-event pavilions to high-tech commercial fit-outs.

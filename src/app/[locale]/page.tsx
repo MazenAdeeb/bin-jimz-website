@@ -1,6 +1,7 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import { Hero } from "@/components/sections/hero";
+import { EcommerceBanner } from "@/components/sections/ecommerce-banner";
 import { Stats } from "@/components/sections/stats";
 import { ServicesGrid } from "@/components/sections/services-grid";
 import { Process } from "@/components/sections/process";
@@ -88,6 +89,13 @@ export default async function HomePage({
         cta={content.hero.cta[lang]}
         secondaryCta={content.hero.secondaryCta[lang]}
         processCta={content.process.ctaLabel[lang]}
+      />
+      <EcommerceBanner
+        eyebrow={content.ecommerce.eyebrow[lang]}
+        title={content.ecommerce.title[lang]}
+        desc={content.ecommerce.desc[lang]}
+        cta={content.ecommerce.cta[lang]}
+        href="/contact"
       />
       <Stats
         items={content.stats.map((s) => ({
